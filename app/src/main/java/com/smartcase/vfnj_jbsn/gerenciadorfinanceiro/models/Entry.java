@@ -15,7 +15,7 @@ public class Entry {
     private int idUser;
 
     private int idEntry;
-    private long valueEntry;
+    private double valueEntry;
     private String dataEntry;
     private String descriptionEntry;
     private String categoryEntry;
@@ -32,11 +32,11 @@ public class Entry {
         return idEntry;
     }
 
-    public long getValueEntry() {
+    public double getValueEntry() {
         return valueEntry;
     }
 
-    public void setValueEntry(long valueEntry) {
+    public void setValueEntry(double valueEntry) {
         this.valueEntry = valueEntry;
     }
 
@@ -64,7 +64,14 @@ public class Entry {
         this.categoryEntry = categoryEntry;
     }
 
-
+    public String toStringiest (){
+        String entry = "Entry:  \n" +
+                getValueEntry() +"\n "+
+                getDataEntry() +"\n "+
+                getDescriptionEntry() +"\n "+
+                getCategoryEntry() +"\n ";
+        return entry;
+    }
 
 
 }

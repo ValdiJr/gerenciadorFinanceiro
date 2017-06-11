@@ -6,7 +6,7 @@ android:layout_height="match_parent"
     android:weightSum="1">
 
     <TextView
-        android:id="@+id/valueEntryTitle"
+        android:id="@+id/valueTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -14,14 +14,14 @@ android:layout_height="match_parent"
         android:text="@string/valueTitle" />
 
     <EditText
-        android:id="@+id/valueEntry"
+        android:id="@+id/valueEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal" />
 
     <TextView
-        android:id="@+id/descriptionEntryTitle"
+        android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -29,7 +29,7 @@ android:layout_height="match_parent"
         android:text="@string/descriptionTitle" />
 
     <EditText
-        android:id="@+id/descriptionEntry"
+        android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="top"
@@ -41,19 +41,30 @@ android:layout_height="match_parent"
         android:id="@+id/spinnerCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/dateEntryTitle"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Data - Hora:"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="0px"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="Data - Hora:"
         />
 
-    <TextView
-        android:id="@+id/dateEntry"
+        <TextView
+            android:id="@+id/dateValueTextView"
+            android:layout_width="0px"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonAdicionar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="" />
-
+        android:text="Adicionar" />
 
 </LinearLayout>
