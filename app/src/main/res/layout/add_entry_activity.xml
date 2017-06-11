@@ -1,0 +1,59 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/valueEntryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/valueTitle" />
+
+    <EditText
+        android:id="@+id/valueEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/descriptionEntryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/descriptionTitle" />
+
+    <EditText
+        android:id="@+id/descriptionEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:layout_weight="0.36" />
+
+    <Spinner
+        android:id="@+id/spinnerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/dateEntryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data - Hora:"
+        />
+
+    <TextView
+        android:id="@+id/dateEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+
+</LinearLayout>

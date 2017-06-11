@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Gerenciador Financeiro</string>
     <string name="action_settings">Settings</string>
+    <string name="descriptionTitle">Descrição</string>
+    <string name="valueTitle">Valor</string>
+        <string-array name="planets_array">
+            <item>Casa</item>
+            <item>Almoço</item>
+            <item>Lanche</item>
+            <item>Roupa</item>
+            <item>Acessórios</item>
+        </string-array>
+
 </resources>

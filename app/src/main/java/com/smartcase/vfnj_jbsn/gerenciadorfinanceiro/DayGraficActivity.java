@@ -19,9 +19,9 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class AddEntryFragment extends Fragment {
+public class DayGraficActivity extends Fragment {
 
-    public AddEntryFragment() {
+    public DayGraficActivity() {
     }
 
     @Override

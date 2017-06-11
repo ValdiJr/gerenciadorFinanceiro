@@ -15,3 +15,36 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 }
+
+//    Entry entry = new Entry();
+//        entry.setValueEntry((long) 3.4);
+//                entry.setCategoryEntry("Casa");
+//                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
+//                entry.setDescriptionEntry("Conta de água");
+//                long result = ManagerDbUtils.writeEntry(entry);
+//
+//                Log.i("banco de dados",""+result);
+
+//    Entry entry = new Entry();
+//        entry.setValueEntry((long) 3.4);
+//                entry.setCategoryEntry("Casa");
+//                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
+//                entry.setDescriptionEntry("Conta de água");
+//                long result = ManagerDbUtils.writeEntry(entry);
+//                result = ManagerDbUtils.writeEntry(entry);
+//                result = ManagerDbUtils.writeEntry(entry);
+//                result = ManagerDbUtils.writeEntry(entry);
+//                result = ManagerDbUtils.writeEntry(entry);
+//                result = ManagerDbUtils.writeEntry(entry);
+//                result = ManagerDbUtils.writeEntry(entry);
+//                result = ManagerDbUtils.writeEntry(entry);
+//                result = ManagerDbUtils.writeEntry(entry);
+//
+//                Cursor cursor = ManagerDbUtils.selectAllEntry();
+//                if (cursor.moveToFirst()) {
+//                while (!cursor.isAfterLast()) {
+//                String data = cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_DATA));
+//                Log.i("banco de dados",""+data);
+//                cursor.moveToNext();
+//                }
+//                }

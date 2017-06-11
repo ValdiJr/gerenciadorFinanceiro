@@ -14,7 +14,7 @@ public class ManagerDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
 
-    static final String DATABASE_NAME = "financeManager.db";
+    static final String DATABASE_NAME = "FinanceManager.db";
 
     public ManagerDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,10 +25,10 @@ public class ManagerDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_FINANCE_ENTRY_TABLE = "CREATE TABLE " + FinanceEntry.TABLE_NAME + " (" +
 
                 FinanceEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                FinanceEntry.COLUMN_ENTRY_VALUE + " REAL NOT NULL " +
+                FinanceEntry.COLUMN_ENTRY_VALUE + " REAL NOT NULL, " +
                 FinanceEntry.COLUMN_ENTRY_DATA + " TEXT NOT NULL, " +
                 FinanceEntry.COLUMN_ENTRY_DESCRIPTION + " TEXT NOT NULL, " +
-                FinanceEntry.COLUMN_ENTRY_CATEGORY + " TEXT NOT NULL, " +
+                FinanceEntry.COLUMN_ENTRY_CATEGORY + " TEXT NOT NULL " +
                 ");";
         sqLiteDatabase.execSQL(SQL_CREATE_FINANCE_ENTRY_TABLE);
 //
