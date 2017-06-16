@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by Dinho-PC on 29/05/2017.
  */
 
-public class Entry {
+public class FinanceEntry {
 
 
 
@@ -65,7 +65,7 @@ public class Entry {
     }
 
     public String toStringiest (){
-        String entry = "Entry:  \n" +
+        String entry = "FinanceEntry:  \n" +
                 getValueEntry() +"\n "+
                 getDataEntry() +"\n "+
                 getDescriptionEntry() +"\n "+

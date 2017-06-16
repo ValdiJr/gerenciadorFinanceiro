@@ -9,8 +9,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.Entry;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.FinanceEntry;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
 
 import java.util.Date;
 
@@ -22,32 +21,32 @@ import java.util.Date;
 
 public class ManagerDbUtils {
     // Insert the new row, returning the primary key value of the new row
-    public static long writeEntry (Entry entry) {
+    public static long writeEntry (FinanceEntry financeEntry) {
         ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
         SQLiteDatabase sqLiteDatabase = managerDbHelper.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(FinanceEntry.COLUMN_ENTRY_VALUE, entry.getValueEntry());
-        values.put(FinanceEntry.COLUMN_ENTRY_DATA, entry.getDataEntry());
-        values.put(FinanceEntry.COLUMN_ENTRY_DESCRIPTION, entry.getDescriptionEntry());
-        values.put(FinanceEntry.COLUMN_ENTRY_CATEGORY, entry.getCategoryEntry());
+        values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE, financeEntry.getValueEntry());
+        values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA, financeEntry.getDataEntry());
+        values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION, financeEntry.getDescriptionEntry());
+        values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY, financeEntry.getCategoryEntry());
 
-        return sqLiteDatabase.insert(FinanceEntry.TABLE_NAME, null, values);
+        return sqLiteDatabase.insert(ManagerContract.FinanceEntry.TABLE_NAME, null, values);
     }
 
     public static Cursor selectAllEntry (){
         ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
-        SQLiteDatabase sqLiteDatabase = managerDbHelper.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = managerDbHelper.getReadableDatabase();
 
 // Define a projection that specifies which columns from the database
 // you will actually use after this query.
         String[] projection = {
-                FinanceEntry._ID,
-                FinanceEntry.COLUMN_ENTRY_VALUE,
-                FinanceEntry.COLUMN_ENTRY_DATA,
-                FinanceEntry.COLUMN_ENTRY_DESCRIPTION,
-                FinanceEntry.COLUMN_ENTRY_CATEGORY
+                ManagerContract.FinanceEntry._ID,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY
         };
 
 // Filter results WHERE "title" = 'My Title'
@@ -59,7 +58,7 @@ public class ManagerDbUtils {
 //                FeedEntry.COLUMN_NAME_SUBTITLE + " DESC";
 
         Cursor c = sqLiteDatabase.query(
-                FinanceEntry.TABLE_NAME,                     // The table to query
+                ManagerContract.FinanceEntry.TABLE_NAME,                     // The table to query
                 projection,                               // The columns to return
                 null,                                // The columns for the WHERE clause
                 null,                            // The values for the WHERE clause

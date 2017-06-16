@@ -5,7 +5,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.Entry;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
 
 import java.util.Date;
 
@@ -56,11 +55,11 @@ public class AddEntryActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Entry entry = new Entry();
-                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
-                entry.setDescriptionEntry(String.valueOf(descriptionEditText.getText()));
-                entry.setValueEntry(Double.parseDouble((String.valueOf(entryValueEditText.getText()))));
-                entry.setCategoryEntry(spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString());
+                FinanceEntry financeEntry = new FinanceEntry();
+                financeEntry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
+                financeEntry.setDescriptionEntry(String.valueOf(descriptionEditText.getText()));
+                financeEntry.setValueEntry(Double.parseDouble((String.valueOf(entryValueEditText.getText()))));
+                financeEntry.setCategoryEntry(spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString());
 
             }
         });

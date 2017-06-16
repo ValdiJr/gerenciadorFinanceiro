@@ -16,7 +16,7 @@ public class ExampleUnitTest {
     }
 }
 
-//    Entry entry = new Entry();
+//    FinanceEntry entry = new FinanceEntry();
 //        entry.setValueEntry((long) 3.4);
 //                entry.setCategoryEntry("Casa");
 //                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
@@ -25,7 +25,7 @@ public class ExampleUnitTest {
 //
 //                Log.i("banco de dados",""+result);
 
-//    Entry entry = new Entry();
+//    FinanceEntry entry = new FinanceEntry();
 //        entry.setValueEntry((long) 3.4);
 //                entry.setCategoryEntry("Casa");
 //                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
