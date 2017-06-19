@@ -6,13 +6,17 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY;
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY_DATE;
 
 /**
  * Created by Dinho-PC on 15/06/2017.
@@ -29,64 +33,34 @@ public class ManagerContentProvider extends ContentProvider {
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
        // sURIMatcher.addURI("contacts", "people", PEOPLE);
-        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY + "date/*", ENTRY_WITH_DATE);
+        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY_DATE+"/*", ENTRY_WITH_DATE);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY, ENTRY);
         return matcher;
     }
 
 
       //location.location_setting = ?
-     private static final String sDateDaySettingSelection =
-               ManagerContract.FinanceEntry.TABLE_NAME+
-                                       "." + ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA + " = ? ";
 
-    private Cursor getEntryByDateDay(Uri uri, String[] projection, String sortOrder) {
-
-        ManagerDbHelper managerDbHelper = new ManagerDbHelper(getAppContext());
-        SQLiteDatabase sqLiteDatabase = managerDbHelper.getReadableDatabase();
-
-
-        String dateDaySetting = ManagerContract.FinanceEntry.getDataEntryFromUri(uri);
-
-        //long startDate = WeatherContract.WeatherEntry.getStartDateFromUri(uri);
-
-        String[] selectionArgs;
-        String selection;
-        selection = sDateDaySettingSelection;
-        selectionArgs = new String[]{dateDaySetting};
-
-
-        Cursor c = sqLiteDatabase.query(
-                ManagerContract.FinanceEntry.TABLE_NAME,                     // The table to query
-                projection,                               // The columns to return
-                selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
-        );
-        return c;
-    }
 
     @Override
     public boolean onCreate() {
         return false;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Cursor retCursor;
                switch (sUriMatcher.match(uri)) {
 
-//            // Student: Uncomment and fill out these two cases
-////            case WEATHER_WITH_LOCATION_AND_DATE:
-////            case WEATHER_WITH_LOCATION:
                        case ENTRY_WITH_DATE: {
-                           retCursor = this.getEntryByDateDay(uri, projection, sortOrder);
+                           Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
+                           retCursor = ManagerDbUtils.getEntryByDateDay(uri, projection, sortOrder);
                            break;
                        }
                        default:
+                           Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
                            throw new UnsupportedOperationException("Unknown uri: " + uri);
 
                    }
@@ -126,7 +100,7 @@ public class ManagerContentProvider extends ContentProvider {
                         switch (match) {
                         case ENTRY: {
                                 //Normalizar data de entrada
-                                //normalizeDate(values);
+
 
                                 long _id = db.insert(ManagerContract.FinanceEntry.TABLE_NAME, null, values);
                                 if ( _id > 0 )

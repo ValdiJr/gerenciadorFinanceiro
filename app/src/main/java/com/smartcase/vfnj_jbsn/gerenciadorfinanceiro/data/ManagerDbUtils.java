@@ -5,13 +5,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
 
 import java.util.Date;
+
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
 /**
  * Created by Dinho-PC on 11/06/2017.
@@ -22,10 +26,55 @@ import java.util.Date;
 public class ManagerDbUtils {
     // Insert the new row, returning the primary key value of the new row
 
+    //Query pela data
+    private static final String sDateDaySettingSelection =
+            ManagerContract.FinanceEntry.TABLE_NAME+
+                    "." + ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA + " = ? ";
+
+
+    public static Cursor getEntryByDateDay(Uri uri, String[] projection, String sortOrder) {
+
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase db = managerDbHelper.getWritableDatabase();
+
+
+        String dateDaySetting = ManagerContract.FinanceEntry.getDataEntryFromUri(uri);
+        Log.i("ManagerUQuery by Date",dateDaySetting);
+                //long startDate = WeatherContract.WeatherEntry.getStartDateFromUri(uri);
+
+        String[] selectionArgs;
+        String selection;
+        selection = ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA + " = ? ";
+        selectionArgs = new String[]{dateDaySetting};
+
+
+        projection = new String []{
+                ManagerContract.FinanceEntry._ID,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY
+        };
+
+        Cursor c = db.query(
+                ManagerContract.FinanceEntry.TABLE_NAME,                     // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+        return c;
+    }
+
+
+
+
     public static ContentValues writeEntry (FinanceEntry financeEntry) {
         //ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
         //SQLiteDatabase sqLiteDatabase = managerDbHelper.getWritableDatabase();
-
+        Log.i("Entry Data", financeEntry.toStringiest());
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         //String dateBrazilNormalized=convertDate(new Date());

@@ -2,6 +2,7 @@ package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
 import java.util.Date;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY;
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,18 +38,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            FinanceEntry entry = new FinanceEntry();
+        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-11");
+        Cursor cursor = getAppContext().getContentResolver().query(financeEntryWithdate,null, null, null, null);
 
-        entry.setValueEntry((long) 3.4);
-                entry.setCategoryEntry("Casa");
-                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
-                entry.setDescriptionEntry("Conta de água");
-                ContentValues values = ManagerDbUtils.writeEntry(entry);
-                Uri financeEntryWriteUri = ManagerContract.FinanceEntry.CONTENT_URI;
-                Uri uriResponde = getAppContext().getContentResolver().insert(financeEntryWriteUri,values);
-
-                Log.i("Banco de DADOS", "ID: "+ uriResponde );
-
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                String data = cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_DATA));
+                data = data + " " + cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_CATEGORY));
+                Log.i("banco de dados", "" + data);
+                cursor.moveToNext();
+            }
+        }
 
 
 

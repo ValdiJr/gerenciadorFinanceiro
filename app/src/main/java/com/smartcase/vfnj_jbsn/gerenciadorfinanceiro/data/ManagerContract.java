@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 /**
  * Created by Dinho-PC on 11/06/2017.
@@ -16,6 +17,7 @@ public class ManagerContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final String PATH_ENTRY = "entry";
+    public static final String PATH_ENTRY_DATE = PATH_ENTRY+"/date";
 
     public static final class FinanceEntry implements BaseColumns {
 
@@ -33,14 +35,15 @@ public class ManagerContract {
               }
 
         public static Uri buildEntryWithDate(String date) {
-                        return CONTENT_URI.buildUpon().appendPath(date).build();
+                        return CONTENT_URI.buildUpon().appendPath("date") .appendPath(date).build();
         }
 
 
 
 
         public static String getDataEntryFromUri(Uri uri) {
-                        return uri.getPathSegments().get(1);
+            Log.i("Uri Segment", uri.getPathSegments().get(2));
+            return uri.getPathSegments().get(2);
         }
 
         public static final String TABLE_NAME = "entry";

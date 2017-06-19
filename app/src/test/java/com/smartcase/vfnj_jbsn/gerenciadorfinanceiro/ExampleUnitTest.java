@@ -16,6 +16,21 @@ public class ExampleUnitTest {
     }
 }
 
+//Teste com UriMatchers
+
+//    FinanceEntry entry = new FinanceEntry();
+//
+//        entry.setValueEntry((long) 3.4);
+//                entry.setCategoryEntry("Casa");
+//                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
+//                entry.setDescriptionEntry("Conta de água");
+//                ContentValues values = ManagerDbUtils.writeEntry(entry);
+//                Uri financeEntryWriteUri = ManagerContract.FinanceEntry.CONTENT_URI;
+//                Uri uriResponde = getAppContext().getContentResolver().insert(financeEntryWriteUri,values);
+//
+//                Log.i("Banco de DADOS", "ID: "+ uriResponde );
+
+
 //    FinanceEntry entry = new FinanceEntry();
 //        entry.setValueEntry((long) 3.4);
 //                entry.setCategoryEntry("Casa");
