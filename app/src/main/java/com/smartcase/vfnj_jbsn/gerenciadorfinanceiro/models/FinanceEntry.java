@@ -66,10 +66,10 @@ public class FinanceEntry {
 
     public String toStringiest (){
         String entry = "FinanceEntry:  \n" +
-                getValueEntry() +"\n "+
-                getDataEntry() +"\n "+
-                getDescriptionEntry() +"\n "+
-                getCategoryEntry() +"\n ";
+                "Value "+getValueEntry() +"\n "+
+                "Data "+getDataEntry() +"\n "+
+                "Description "+getDescriptionEntry() +"\n "+
+                "Category "+getCategoryEntry() +"\n ";
         return entry;
     }
 

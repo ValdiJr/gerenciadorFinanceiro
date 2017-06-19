@@ -29,7 +29,7 @@
         </activity>
         <provider
             android:authorities="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro"
-            android:name="data.ManagerContentProvider"/>
+            android:name="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContentProvider"/>
     </application>
 
 </manifest>

@@ -25,7 +25,7 @@ public class ManagerContract {
 
         public static final String CONTENT_TYPE =
                            ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ENTRY;
-      public static final String CONTENT_ITEM_TYPE =
+        public static final String CONTENT_ITEM_TYPE =
                             ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ENTRY;
 
         public static Uri buildEntryUri(long id) {
@@ -35,6 +35,9 @@ public class ManagerContract {
         public static Uri buildEntryWithDate(String date) {
                         return CONTENT_URI.buildUpon().appendPath(date).build();
         }
+
+
+
 
         public static String getDataEntryFromUri(Uri uri) {
                         return uri.getPathSegments().get(1);

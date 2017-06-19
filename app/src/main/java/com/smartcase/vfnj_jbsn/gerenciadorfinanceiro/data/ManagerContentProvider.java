@@ -11,20 +11,26 @@ import android.support.annotation.Nullable;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication;
 
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY;
+
 /**
  * Created by Dinho-PC on 15/06/2017.
  */
 
 public class ManagerContentProvider extends ContentProvider {
 
+
+    //private ManagerDbHelper mOpenHelper = new ManagerDbHelper(getAppContext());
     static final int ENTRY_WITH_DATE = 101;
+    static final int ENTRY = 100;
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
        // sURIMatcher.addURI("contacts", "people", PEOPLE);
-        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, "date/*", ENTRY_WITH_DATE);
-
+        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY + "date/*", ENTRY_WITH_DATE);
+        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY, ENTRY);
         return matcher;
     }
 
@@ -36,7 +42,7 @@ public class ManagerContentProvider extends ContentProvider {
 
     private Cursor getEntryByDateDay(Uri uri, String[] projection, String sortOrder) {
 
-        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(getAppContext());
         SQLiteDatabase sqLiteDatabase = managerDbHelper.getReadableDatabase();
 
 
@@ -70,7 +76,22 @@ public class ManagerContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return null;
+        Cursor retCursor;
+               switch (sUriMatcher.match(uri)) {
+
+//            // Student: Uncomment and fill out these two cases
+////            case WEATHER_WITH_LOCATION_AND_DATE:
+////            case WEATHER_WITH_LOCATION:
+                       case ENTRY_WITH_DATE: {
+                           retCursor = this.getEntryByDateDay(uri, projection, sortOrder);
+                           break;
+                       }
+                       default:
+                           throw new UnsupportedOperationException("Unknown uri: " + uri);
+
+                   }
+        retCursor.setNotificationUri(getContext().getContentResolver(),uri);
+        return retCursor;
     }
 
     @Nullable
@@ -97,16 +118,75 @@ public class ManagerContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase db = managerDbHelper.getWritableDatabase();
+                final int match = sUriMatcher.match(uri);
+                Uri returnUri;
+
+                        switch (match) {
+                        case ENTRY: {
+                                //Normalizar data de entrada
+                                //normalizeDate(values);
+
+                                long _id = db.insert(ManagerContract.FinanceEntry.TABLE_NAME, null, values);
+                                if ( _id > 0 )
+                                        returnUri = ManagerContract.FinanceEntry.buildEntryUri(_id);
+                                else
+                                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                                break;
+                            }
+                        default:
+                                throw new UnsupportedOperationException("Unknown uri: " + uri);
+                        }
+                getContext().getContentResolver().notifyChange(uri, null);
+                return returnUri;
+
+
+
+
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase db = managerDbHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+
+        int rowsDeleted;
+        switch (match) {
+            case ENTRY: {
+               rowsDeleted = db.delete(ManagerContract.FinanceEntry.TABLE_NAME, selection, selectionArgs);
+
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        if ( rowsDeleted !=0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsDeleted;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase db = managerDbHelper.getWritableDatabase();
+        final int match = sUriMatcher.match(uri);
+
+        int rowsUpdated;
+        switch (match) {
+            case ENTRY: {
+                rowsUpdated = db.update(ManagerContract.FinanceEntry.TABLE_NAME, values, selection, selectionArgs);
+
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        if ( rowsUpdated !=0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+        return rowsUpdated;
     }
 }

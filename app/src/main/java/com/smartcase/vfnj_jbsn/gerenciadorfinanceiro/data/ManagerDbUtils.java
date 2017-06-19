@@ -21,18 +21,21 @@ import java.util.Date;
 
 public class ManagerDbUtils {
     // Insert the new row, returning the primary key value of the new row
-    public static long writeEntry (FinanceEntry financeEntry) {
-        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
-        SQLiteDatabase sqLiteDatabase = managerDbHelper.getWritableDatabase();
+
+    public static ContentValues writeEntry (FinanceEntry financeEntry) {
+        //ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        //SQLiteDatabase sqLiteDatabase = managerDbHelper.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
+        //String dateBrazilNormalized=convertDate(new Date());
         values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE, financeEntry.getValueEntry());
         values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA, financeEntry.getDataEntry());
         values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION, financeEntry.getDescriptionEntry());
         values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY, financeEntry.getCategoryEntry());
 
-        return sqLiteDatabase.insert(ManagerContract.FinanceEntry.TABLE_NAME, null, values);
+        return values;
+        //return sqLiteDatabase.insert(ManagerContract.FinanceEntry.TABLE_NAME, null, values);
     }
 
     public static Cursor selectAllEntry (){
@@ -49,13 +52,6 @@ public class ManagerDbUtils {
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY
         };
 
-// Filter results WHERE "title" = 'My Title'
-//        String selection = FeedEntry.COLUMN_NAME_TITLE + " = ?";
-//        String[] selectionArgs = { "My Title" };
-
-// How you want the results sorted in the resulting Cursor
-//        String sortOrder =
-//                FeedEntry.COLUMN_NAME_SUBTITLE + " DESC";
 
         Cursor c = sqLiteDatabase.query(
                 ManagerContract.FinanceEntry.TABLE_NAME,                     // The table to query
