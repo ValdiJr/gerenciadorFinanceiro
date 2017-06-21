@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -30,6 +33,9 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract
 
 public class MainActivity extends AppCompatActivity {
 
+    // Pega o FragmentManager
+    FragmentManager fm = getSupportFragmentManager();
+    // Abre uma transação e adiciona
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -39,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.add(R.id.fragment_content, new LastEntryActivity());
+        ft.commit();
 
 
 
@@ -72,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.fragment_content, new GraficActivity());
+            ft.commit();
             return true;
         }
 

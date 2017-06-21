@@ -25,7 +25,10 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
 
 public class ManagerDbUtils {
     // Insert the new row, returning the primary key value of the new row
-
+    // These indices are tied to FORECAST_COLUMNS.  If FORECAST_COLUMNS changes, these
+    // must change. Ex:
+    //static final int COL_WEATHER_ID = 0;
+    //static final int COL_WEATHER_DATE = 1;
     //Query pela data
     private static final String sDateDaySettingSelection =
             ManagerContract.FinanceEntry.TABLE_NAME+

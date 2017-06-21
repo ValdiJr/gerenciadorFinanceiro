@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.support.v4.content.CursorLoader;
+
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.utils.FinanceEntryAdapter;
 
@@ -20,37 +24,46 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract
 /**
  * A placeholder fragment containing a simple view.
  */
-public class LastEntryActivity extends Fragment {
+public class LastEntryActivity extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor>{
 
     public LastEntryActivity() {
     }
     private FinanceEntryAdapter financeEntryAdapter;
+    private static final int loader_id=1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.last_entry_fragment_main, container, false);
 
+        getLoaderManager().initLoader(loader_id, null, this);
 
-        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-11");
-        Cursor cursor = getAppContext().getContentResolver().query(financeEntryWithdate,null, null, null, null);
-        financeEntryAdapter = new FinanceEntryAdapter(getAppContext(),cursor,0);
+        financeEntryAdapter = new FinanceEntryAdapter(getAppContext(),null,0);
         ListView listView = (ListView) view.findViewById(R.id.listview_forecast);
         listView.setAdapter(financeEntryAdapter);
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                String data = cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_DATA));
-                data = data + " " + cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_CATEGORY));
-                Log.i("banco de dados", "" + data);
-                cursor.moveToNext();
-            }
-        }
-
 
 
         return view;
 
 
 
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-11");
+        return new CursorLoader(getAppContext(),financeEntryWithdate,null,null,null,null);
+    }
+
+
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        financeEntryAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+        financeEntryAdapter.swapCursor(null);
     }
 }

@@ -32,6 +32,6 @@ public class FinanceEntryAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         TextView tv = (TextView)view;
-                tv.setText(cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_CATEGORY)));
+                tv.setText(cursor.getString(2));
     }
 }
