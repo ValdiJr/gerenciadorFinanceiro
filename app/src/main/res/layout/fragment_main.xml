@@ -7,9 +7,17 @@
     tools:context="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.DayGraficActivity"
     tools:showIn="@layout/activity_main">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart"
+    <ListView
+        android:id="@+id/listview_forecast"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
+
+
+    <!--<com.github.mikephil.charting.charts.LineChart-->
+        <!--android:id="@+id/chart"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
 </android.support.constraint.ConstraintLayout>

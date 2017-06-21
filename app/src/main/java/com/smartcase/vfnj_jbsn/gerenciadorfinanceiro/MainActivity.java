@@ -15,10 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.utils.FinanceEntryAdapter;
 
 import java.util.Date;
 
@@ -28,6 +30,7 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract
 
 public class MainActivity extends AppCompatActivity {
 
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +39,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-11");
-        Cursor cursor = getAppContext().getContentResolver().query(financeEntryWithdate,null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                String data = cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_DATA));
-                data = data + " " + cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_CATEGORY));
-                Log.i("banco de dados", "" + data);
-                cursor.moveToNext();
-            }
-        }
 
 
 

@@ -16,38 +16,7 @@ public class ExampleUnitTest {
     }
 }
 
-//Graficos
-// LineChart chart = (LineChart) view.findViewById(R.id.chart);
-//    List<Entry> entries = new ArrayList<Entry>();
-//
-//        entries.add(new Entry(10, 3));
-//                entries.add(new Entry(14, 9));
-//                entries.add(new Entry(7, 10));
-//                entries.add(new Entry(1, 2));
-//                entries.add(new Entry(5, 8));
-//                entries.add(new Entry(9, 5));
-//                Collections.sort(entries, new EntryXComparator());
-//                LineDataSet dataSet = new LineDataSet(entries, "Label");
-//                LineData lineData = new LineData(dataSet);
-//                chart.setData(lineData);
-//                chart.invalidate();
-
-
 //Teste com UriMatchers
-//
-//    Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-11");
-//    Cursor cursor = getAppContext().getContentResolver().query(financeEntryWithdate,null, null, null, null);
-//
-//        if (cursor.moveToFirst()) {
-//                while (!cursor.isAfterLast()) {
-//                String data = cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_DATA));
-//                data = data + " " + cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_CATEGORY));
-//                Log.i("banco de dados", "" + data);
-//                cursor.moveToNext();
-//                }
-//                }
-
-
 
 //    FinanceEntry entry = new FinanceEntry();
 //
