@@ -2,8 +2,8 @@ package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,33 +29,30 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract
 /**
  * A placeholder fragment containing a simple view.
  */
-public class DayGraficActivity extends Fragment {
+public class GraficActivity extends Fragment {
 
-    public DayGraficActivity() {
+    public GraficActivity() {
     }
-    private FinanceEntryAdapter financeEntryAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.grafic_fragment_main, container, false);
 
+ LineChart chart = (LineChart) view.findViewById(R.id.chart);
+    List<Entry> entries = new ArrayList<Entry>();
 
-        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-11");
-        Cursor cursor = getAppContext().getContentResolver().query(financeEntryWithdate,null, null, null, null);
-        financeEntryAdapter = new FinanceEntryAdapter(getAppContext(),cursor,0);
-        ListView listView = (ListView) view.findViewById(R.id.listview_forecast);
-        listView.setAdapter(financeEntryAdapter);
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                String data = cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_DATA));
-                data = data + " " + cursor.getString(cursor.getColumnIndex(COLUMN_ENTRY_CATEGORY));
-                Log.i("banco de dados", "" + data);
-                cursor.moveToNext();
-            }
-        }
-
-
+        entries.add(new Entry(10, 3));
+                entries.add(new Entry(14, 9));
+                entries.add(new Entry(7, 10));
+                entries.add(new Entry(1, 2));
+                entries.add(new Entry(5, 8));
+                entries.add(new Entry(9, 5));
+                Collections.sort(entries, new EntryXComparator());
+                LineDataSet dataSet = new LineDataSet(entries, "Label");
+                LineData lineData = new LineData(dataSet);
+                chart.setData(lineData);
+                chart.invalidate();
 
         return view;
 

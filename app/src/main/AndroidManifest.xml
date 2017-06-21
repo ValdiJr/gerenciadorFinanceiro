@@ -27,6 +27,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
         </activity>
+
         <provider
             android:authorities="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro"
             android:name="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContentProvider"/>
