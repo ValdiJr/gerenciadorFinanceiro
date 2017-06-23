@@ -2,16 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro">
 
-    <application android:name="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication"
-
-
+    <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -29,8 +27,18 @@
         </activity>
 
         <provider
-            android:authorities="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro"
-            android:name="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContentProvider"/>
+            android:name=".data.ManagerContentProvider"
+            android:authorities="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro" />
+
+        <activity
+            android:name=".EntryEditActivity"
+            android:label="@string/title_activity_entry_edit"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

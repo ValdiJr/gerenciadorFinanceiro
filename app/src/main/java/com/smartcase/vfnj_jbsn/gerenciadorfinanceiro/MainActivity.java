@@ -46,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+
+
+
+
+
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragment_content, new LastEntryActivity());
         ft.commit();

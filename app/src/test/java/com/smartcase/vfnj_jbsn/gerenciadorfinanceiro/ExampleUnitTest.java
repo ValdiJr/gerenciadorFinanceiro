@@ -47,6 +47,26 @@ import static org.junit.Assert.*;
 //                }
 //                }
 
+//
+//  Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithID(2);
+//          Cursor cursor = getAppContext().getContentResolver().query(financeEntryWithdate,null, null, null, null);
+//          Log.i("Cursor value: ",""+cursor.toString());
+//
+//          if (cursor.moveToFirst()) {
+//          while (!cursor.isAfterLast()) {
+//          String data = String.valueOf(cursor.getInt(0));
+//          data = data +"\n"+String.valueOf(cursor.getLong(1));
+//          data = data +"\n"+String.valueOf(cursor.getString(2));
+//          data = data +"\n"+String.valueOf(cursor.getString(3));
+//          data = data +"\n"+String.valueOf(cursor.getString(4));
+//
+//
+//          Log.i("banco de dados", "" + data);
+//          cursor.moveToNext();
+//          }
+//          }
+
+
 
 
 //    FinanceEntry entry = new FinanceEntry();
@@ -94,3 +114,29 @@ import static org.junit.Assert.*;
 //                cursor.moveToNext();
 //                }
 //                }
+
+
+//Click com URI Matcher
+//@Override
+//public void onItemClick(AdapterView adapterView, View view, int position, long l) {
+//        // CursorAdapter returns a cursor at the correct position for getItem(), or null
+//        // if it cannot seek to that position.
+//        Cursor c = (Cursor) adapterView.getItemAtPosition(position);
+//        Log.i("banco de dados", "" + position);
+//        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
+//        Cursor cursor = getAppContext().getContentResolver().query(financeEntryWithdate,null, null, null, null);
+//        Log.i("Cursor value: ",""+cursor.toString());
+//
+//        if (cursor.moveToFirst()) {
+//        while (!cursor.isAfterLast()) {
+//        String data = String.valueOf(cursor.getInt(0));
+//        data = data +"\n"+String.valueOf(cursor.getLong(1));
+//        data = data +"\n"+String.valueOf(cursor.getString(2));
+//        data = data +"\n"+String.valueOf(cursor.getString(3));
+//        data = data +"\n"+String.valueOf(cursor.getString(4));
+//
+//
+//        Log.i("banco de dados", "" + data);
+//        cursor.moveToNext();
+//        }
+//        }

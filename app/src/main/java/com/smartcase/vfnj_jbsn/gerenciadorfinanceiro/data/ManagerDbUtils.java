@@ -71,7 +71,46 @@ public class ManagerDbUtils {
         return c;
     }
 
+    private static final String sIDEntrySelection =
+            ManagerContract.FinanceEntry.TABLE_NAME+
+                    "." + ManagerContract.FinanceEntry._ID + " = ? ";
 
+
+    public static Cursor getEntryByID(Uri uri, String[] projection, String sortOrder) {
+
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase db = managerDbHelper.getWritableDatabase();
+
+
+        Long ID_entry = ManagerContract.FinanceEntry.getIDFromUri(uri);
+        Log.i("ManagerUQuery by ID: "," "+  ID_entry);
+        //long startDate = WeatherContract.WeatherEntry.getStartDateFromUri(uri);
+
+        String[] selectionArgs;
+        String selection;
+        selection = ManagerContract.FinanceEntry._ID+ " = ? ";
+        selectionArgs = new String[]{String.valueOf(ID_entry)};
+
+
+        projection = new String []{
+                ManagerContract.FinanceEntry._ID,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY
+        };
+
+        Cursor c = db.query(
+                ManagerContract.FinanceEntry.TABLE_NAME,                     // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+        return c;
+    }
 
 
     public static ContentValues writeEntry (FinanceEntry financeEntry) {

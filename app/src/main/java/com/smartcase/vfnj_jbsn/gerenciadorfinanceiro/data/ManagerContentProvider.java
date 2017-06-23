@@ -17,6 +17,7 @@ import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication;
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY;
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY_DATE;
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY_ID;
 
 /**
  * Created by Dinho-PC on 15/06/2017.
@@ -28,6 +29,7 @@ public class ManagerContentProvider extends ContentProvider {
     //private ManagerDbHelper mOpenHelper = new ManagerDbHelper(getAppContext());
     static final int ENTRY_WITH_DATE = 101;
     static final int ENTRY = 100;
+    static final int ENTRY_WITH_ID = 102;
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
     static UriMatcher buildUriMatcher() {
@@ -35,6 +37,7 @@ public class ManagerContentProvider extends ContentProvider {
        // sURIMatcher.addURI("contacts", "people", PEOPLE);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY_DATE+"/*", ENTRY_WITH_DATE);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY, ENTRY);
+        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY_ID+"/#", ENTRY_WITH_ID);
         return matcher;
     }
 
@@ -59,6 +62,11 @@ public class ManagerContentProvider extends ContentProvider {
                            retCursor = ManagerDbUtils.getEntryByDateDay(uri, projection, sortOrder);
                            break;
                        }
+                   case ENTRY_WITH_ID: {
+                       Log.i("ENTRY_WITH_ID", String.valueOf(uri) +" "+sUriMatcher.match(uri));
+                       retCursor = ManagerDbUtils.getEntryByID(uri, projection, sortOrder);
+                       break;
+                   }
                        default:
                            Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
                            throw new UnsupportedOperationException("Unknown uri: " + uri);

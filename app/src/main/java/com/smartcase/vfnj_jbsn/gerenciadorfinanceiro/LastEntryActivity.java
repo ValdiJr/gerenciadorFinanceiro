@@ -1,5 +1,6 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import android.support.v4.app.LoaderManager;
@@ -18,8 +20,7 @@ import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.utils.FinanceEntryAdapter;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
-import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY;
-import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -41,6 +42,24 @@ public class LastEntryActivity extends Fragment implements  LoaderManager.Loader
         financeEntryAdapter = new FinanceEntryAdapter(getAppContext(),null,0);
         ListView listView = (ListView) view.findViewById(R.id.listview_forecast);
         listView.setAdapter(financeEntryAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView adapterView, View view, int position, long l) {
+                // CursorAdapter returns a cursor at the correct position for getItem(), or null
+                // if it cannot seek to that position.
+                Cursor c = (Cursor) adapterView.getItemAtPosition(position);
+                Log.i("banco de dados", "" + position);
+                Uri financeEntryWithID = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
+
+
+                    Intent intent = new Intent(getActivity(), EntryEditActivity.class)
+                            .setData(financeEntryWithID);
+                    startActivity(intent);
+
+            }
+        });
 
 
         return view;
