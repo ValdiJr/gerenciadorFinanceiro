@@ -158,8 +158,7 @@ public class ManagerDbUtils {
     public static String convertDate (Date date) {
 
         TimeZone tz = TimeZone.getTimeZone("Brazil/East");
-        SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         destFormat.setTimeZone(tz);
         String dateString = destFormat.format(date);
         return dateString;

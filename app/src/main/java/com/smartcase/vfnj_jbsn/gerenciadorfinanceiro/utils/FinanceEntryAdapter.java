@@ -20,6 +20,7 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract
 
 public class FinanceEntryAdapter extends CursorAdapter {
 
+
     public static class ViewHolder {
         public final ImageView iconView;
         public final TextView dateView;
@@ -47,8 +48,6 @@ public class FinanceEntryAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-//        TextView tv = (TextView)view;
-//                tv.setText(cursor.getString(2));
         ImageView iconView = (ImageView) view.findViewById(R.id.list_item_icon);
         iconView.setImageResource(R.drawable.default_icon);
 
@@ -63,8 +62,5 @@ public class FinanceEntryAdapter extends CursorAdapter {
 
         TextView categoryEntryView = (TextView) view.findViewById(R.id.list_item_low_textview);
         categoryEntryView.setText(cursor.getString(4));
-
-
-
     }
 }
