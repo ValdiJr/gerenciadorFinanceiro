@@ -23,17 +23,17 @@ public class FinanceEntryAdapter extends CursorAdapter {
 
     public static class ViewHolder {
         public final ImageView iconView;
-        public final TextView dateView;
-        public final TextView descriptionView;
-        public final TextView highTempView;
-        public final TextView lowTempView;
+        public final TextView dataEntryView;
+        public final TextView descriptionEntryView;
+        public final TextView valueEntryView;
+        public final TextView categoryEntryView;
 
         public ViewHolder(View view) {
             iconView = (ImageView) view.findViewById(R.id.list_item_icon);
-            dateView = (TextView) view.findViewById(R.id.list_item_detail);
-            descriptionView = (TextView) view.findViewById(R.id.list_item_entryfinance_textview);
-            highTempView = (TextView) view.findViewById(R.id.list_item_high_textview);
-            lowTempView = (TextView) view.findViewById(R.id.list_item_low_textview);
+            dataEntryView = (TextView) view.findViewById(R.id.list_item_detail);
+            descriptionEntryView = (TextView) view.findViewById(R.id.list_item_entryfinance_textview);
+            valueEntryView = (TextView) view.findViewById(R.id.list_item_high_textview);
+            categoryEntryView = (TextView) view.findViewById(R.id.list_item_low_textview);
         }
     }
     public FinanceEntryAdapter(Context context, Cursor c, int flags) {
@@ -43,24 +43,34 @@ public class FinanceEntryAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_view_financeentry, parent, false);
+
+
+
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setTag(viewHolder);
+
         return view;
+
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        ImageView iconView = (ImageView) view.findViewById(R.id.list_item_icon);
-        iconView.setImageResource(R.drawable.default_icon);
+
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
+
+        //ImageView iconView = (ImageView) view.findViewById(R.id.list_item_icon);
+        viewHolder.iconView.setImageResource(R.drawable.default_icon);
 
         TextView valueEntryView = (TextView) view.findViewById(R.id.list_item_high_textview);
-        valueEntryView.setText(cursor.getDouble(1)+"");
+        viewHolder.valueEntryView.setText(cursor.getDouble(1)+"");
 
         TextView dataEntryView = (TextView) view.findViewById(R.id.list_item_detail);
-        dataEntryView.setText(cursor.getString(2));
+        viewHolder.dataEntryView.setText(cursor.getString(2));
 
         TextView descriptionEntryView = (TextView) view.findViewById(R.id.list_item_entryfinance_textview);
-        descriptionEntryView.setText(cursor.getString(3));
+        viewHolder.descriptionEntryView.setText(cursor.getString(3));
 
         TextView categoryEntryView = (TextView) view.findViewById(R.id.list_item_low_textview);
-        categoryEntryView.setText(cursor.getString(4));
+        viewHolder.categoryEntryView.setText(cursor.getString(4));
     }
 }

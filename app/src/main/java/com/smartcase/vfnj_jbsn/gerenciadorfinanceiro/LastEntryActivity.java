@@ -70,7 +70,7 @@ public class LastEntryActivity extends Fragment implements  LoaderManager.Loader
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-11");
+        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-27");
         return new CursorLoader(getAppContext(),financeEntryWithdate,null,null,null,null);
     }
 

@@ -34,7 +34,7 @@ public class ManagerContentProvider extends ContentProvider {
 
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
-       // sURIMatcher.addURI("contacts", "people", PEOPLE);
+        // sURIMatcher.addURI("contacts", "people", PEOPLE);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY_DATE+"/*", ENTRY_WITH_DATE);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY, ENTRY);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY_ID+"/#", ENTRY_WITH_ID);
@@ -42,7 +42,7 @@ public class ManagerContentProvider extends ContentProvider {
     }
 
 
-      //location.location_setting = ?
+    //location.location_setting = ?
 
 
     @Override
@@ -55,23 +55,23 @@ public class ManagerContentProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Cursor retCursor;
-               switch (sUriMatcher.match(uri)) {
+        switch (sUriMatcher.match(uri)) {
 
-                       case ENTRY_WITH_DATE: {
-                           Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
-                           retCursor = ManagerDbUtils.getEntryByDateDay(uri, projection, sortOrder);
-                           break;
-                       }
-                   case ENTRY_WITH_ID: {
-                       Log.i("ENTRY_WITH_ID", String.valueOf(uri) +" "+sUriMatcher.match(uri));
-                       retCursor = ManagerDbUtils.getEntryByID(uri, projection, sortOrder);
-                       break;
-                   }
-                       default:
-                           Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
-                           throw new UnsupportedOperationException("Unknown uri: " + uri);
+            case ENTRY_WITH_DATE: {
+                Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
+                retCursor = ManagerDbUtils.getEntryByDateDay(uri, projection, sortOrder);
+                break;
+            }
+            case ENTRY_WITH_ID: {
+                Log.i("ENTRY_WITH_ID", String.valueOf(uri) +" "+sUriMatcher.match(uri));
+                retCursor = ManagerDbUtils.getEntryByID(uri, projection, sortOrder);
+                break;
+            }
+            default:
+                Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
 
-                   }
+        }
         retCursor.setNotificationUri(getContext().getContentResolver(),uri);
         return retCursor;
     }
@@ -102,26 +102,26 @@ public class ManagerContentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
         SQLiteDatabase db = managerDbHelper.getWritableDatabase();
-                final int match = sUriMatcher.match(uri);
-                Uri returnUri;
+        final int match = sUriMatcher.match(uri);
+        Uri returnUri;
 
-                        switch (match) {
-                        case ENTRY: {
-                                //Normalizar data de entrada
+        switch (match) {
+            case ENTRY: {
+                //Normalizar data de entrada
 
 
-                                long _id = db.insert(ManagerContract.FinanceEntry.TABLE_NAME, null, values);
-                                if ( _id > 0 )
-                                        returnUri = ManagerContract.FinanceEntry.buildEntryUri(_id);
-                                else
-                                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                                break;
-                            }
-                        default:
-                                throw new UnsupportedOperationException("Unknown uri: " + uri);
-                        }
-                getContext().getContentResolver().notifyChange(uri, null);
-                return returnUri;
+                long _id = db.insert(ManagerContract.FinanceEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = ManagerContract.FinanceEntry.buildEntryUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return returnUri;
 
 
 
@@ -137,7 +137,7 @@ public class ManagerContentProvider extends ContentProvider {
         int rowsDeleted;
         switch (match) {
             case ENTRY: {
-               rowsDeleted = db.delete(ManagerContract.FinanceEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = db.delete(ManagerContract.FinanceEntry.TABLE_NAME, selection, selectionArgs);
 
                 break;
             }
