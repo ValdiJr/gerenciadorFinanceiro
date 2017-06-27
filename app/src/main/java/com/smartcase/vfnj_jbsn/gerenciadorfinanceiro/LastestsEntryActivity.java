@@ -25,9 +25,9 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
 /**
  * A placeholder fragment containing a simple view.
  */
-public class LastEntryActivity extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor>{
+public class LastestsEntryActivity extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor>{
 
-    public LastEntryActivity() {
+    public LastestsEntryActivity() {
     }
     private FinanceEntryAdapter financeEntryAdapter;
     private static final int loader_id=1;
@@ -35,7 +35,7 @@ public class LastEntryActivity extends Fragment implements  LoaderManager.Loader
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.last_entry_fragment_main, container, false);
+        View view = inflater.inflate(R.layout.lastests_entry_fragment_main, container, false);
 
         getLoaderManager().initLoader(loader_id, null, this);
 

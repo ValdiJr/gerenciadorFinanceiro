@@ -1,35 +1,18 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.utils.FinanceEntryAdapter;
-
-import java.util.Date;
-
-import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
-import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY;
-import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_content, new LastEntryActivity());
+        ft.add(R.id.fragment_content, new LastestsEntryActivity());
         ft.commit();
 
 
@@ -99,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.fragment_content, new GraficActivity());
+            ft.addToBackStack(null);
             ft.commit();
             return true;
         }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.LastEntryActivity"
+    tools:context="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.LastestsEntryActivity"
     android:layout_marginTop="?attr/actionBarSize"
     tools:showIn="@layout/activity_main">
 
