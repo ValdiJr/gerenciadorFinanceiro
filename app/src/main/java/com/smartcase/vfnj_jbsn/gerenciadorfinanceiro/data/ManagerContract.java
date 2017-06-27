@@ -37,6 +37,10 @@ public class ManagerContract {
         public static Uri buildEntryWithDate(String date) {
                         return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("date") .appendPath(date).build();
         }
+        public static String getDataEntryFromUri(Uri uri) {
+            Log.i("Uri Segment", uri.getPathSegments().get(2));
+            return uri.getPathSegments().get(2);
+        }
 
         public static Uri buildEntryWithID(int id) {
             return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("id").appendPath(Integer.toString(id)).build();
@@ -44,19 +48,20 @@ public class ManagerContract {
         public static long getIDFromUri(Uri uri) {
             return Long.parseLong(uri.getPathSegments().get(2));
         }
-
-
-
-
-
-        public static String getDataEntryFromUri(Uri uri) {
-            Log.i("Uri Segment", uri.getPathSegments().get(2));
-            return uri.getPathSegments().get(2);
+        public static Uri buildNewEntry() {
+            return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).build();
         }
-        public static String getIDEntryFromUri(Uri uri) {
-            Log.i("Uri Segment", uri.getPathSegments().get(2));
-            return uri.getPathSegments().get(2);
-        }
+
+
+
+
+
+
+
+//        public static String getIDEntryFromUri(Uri uri) {
+//            Log.i("Uri Segment", uri.getPathSegments().get(2));
+//            return uri.getPathSegments().get(2);
+//        }
 
         public static final String TABLE_NAME = "entry";
         public static final String COLUMN_ENTRY_VALUE = "entry_value";

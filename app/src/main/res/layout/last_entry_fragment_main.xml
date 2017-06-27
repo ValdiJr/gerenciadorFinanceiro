@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.LastEntryActivity"
+    android:layout_marginTop="?attr/actionBarSize"
     tools:showIn="@layout/activity_main">
 
     <ListView

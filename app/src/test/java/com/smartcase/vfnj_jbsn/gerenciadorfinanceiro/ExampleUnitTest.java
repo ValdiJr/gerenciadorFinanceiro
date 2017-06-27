@@ -68,22 +68,21 @@ import static org.junit.Assert.*;
 
 
 
-
-//    FinanceEntry entry = new FinanceEntry();
+//        FinanceEntry entry = new FinanceEntry();
 //
-//        entry.setValueEntry((long) 3.4);
-//                entry.setCategoryEntry("Casa");
+//                entry.setValueEntry(9.70);
+//                entry.setCategoryEntry("Lanche");
 //                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
-//                entry.setDescriptionEntry("Conta de água");
+//                entry.setDescriptionEntry("Coxinha");
 //                ContentValues values = ManagerDbUtils.writeEntry(entry);
-//                Uri financeEntryWriteUri = ManagerContract.FinanceEntry.CONTENT_URI;
+//                Uri financeEntryWriteUri = ManagerContract.FinanceEntry.buildNewEntry();
 //                Uri uriResponde = getAppContext().getContentResolver().insert(financeEntryWriteUri,values);
 //
 //                Log.i("Banco de DADOS", "ID: "+ uriResponde );
 
 
 //    FinanceEntry entry = new FinanceEntry();
-//        entry.setValueEntry((long) 3.4);
+//        entry.setValueEntry(3.4);
 //                entry.setCategoryEntry("Casa");
 //                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
 //                entry.setDescriptionEntry("Conta de água");
