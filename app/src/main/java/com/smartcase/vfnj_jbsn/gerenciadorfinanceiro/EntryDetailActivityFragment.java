@@ -18,11 +18,11 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
 /**
  * A placeholder fragment containing a simple view.
  */
-public class EntryEditActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class EntryDetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
 
-    public EntryEditActivityFragment() {
+    public EntryDetailActivityFragment() {
 
     }
     private static final int loader_id_edit=2;

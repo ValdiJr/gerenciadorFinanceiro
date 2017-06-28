@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_content, new LastestsEntryActivity());
-        ft.commit();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.add(R.id.fragment_content, new LastestsEntryActivity());
+//        ft.commit();
 
 
 
@@ -80,11 +80,13 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.fragment_content, new GraficActivity());
-            ft.addToBackStack(null);
-            ft.commit();
-            return true;
+//            FragmentTransaction ft = fm.beginTransaction();
+//            ft.remove(getSupportFragmentManager().findFragmentById(R.id.fragment_forecast)).commit();
+//            ft = fm.beginTransaction();
+//            ft.replace(R.id.fragment_forecast, new GraficActivity());
+//            ft.addToBackStack(null);
+//            ft.commit();
+//            return true;
         }
 
         return super.onOptionsItemSelected(item);

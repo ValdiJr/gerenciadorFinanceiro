@@ -31,7 +31,7 @@
             android:authorities="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro" />
 
         <activity
-            android:name=".EntryEditActivity"
+            android:name=".EntryDetailActivity"
             android:label="@string/title_activity_entry_edit"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

@@ -54,7 +54,7 @@ public class LastestsEntryActivity extends Fragment implements  LoaderManager.Lo
                 Uri financeEntryWithID = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
 
 
-                    Intent intent = new Intent(getActivity(), EntryEditActivity.class)
+                    Intent intent = new Intent(getActivity(), EntryDetailActivity.class)
                             .setData(financeEntryWithID);
                     startActivity(intent);
 
