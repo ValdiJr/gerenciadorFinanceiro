@@ -1,8 +1,11 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +20,11 @@ import android.support.v4.content.Loader;
 import android.support.v4.content.CursorLoader;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.utils.FinanceEntryAdapter;
+
+import java.util.Date;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
@@ -25,13 +32,14 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
 /**
  * A placeholder fragment containing a simple view.
  */
-public class LastestsEntryActivity extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor>{
+public class LatestsEntryFragment extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor>{
 
-    public LastestsEntryActivity() {
+    public LatestsEntryFragment() {
     }
     private FinanceEntryAdapter financeEntryAdapter;
     private static final int loader_id=1;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,6 +50,8 @@ public class LastestsEntryActivity extends Fragment implements  LoaderManager.Lo
         financeEntryAdapter = new FinanceEntryAdapter(getAppContext(),null,0);
         ListView listView = (ListView) view.findViewById(R.id.listview_forecast);
         listView.setAdapter(financeEntryAdapter);
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -70,7 +80,7 @@ public class LastestsEntryActivity extends Fragment implements  LoaderManager.Lo
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-27");
+        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-28");
         return new CursorLoader(getAppContext(),financeEntryWithdate,null,null,null,null);
     }
 

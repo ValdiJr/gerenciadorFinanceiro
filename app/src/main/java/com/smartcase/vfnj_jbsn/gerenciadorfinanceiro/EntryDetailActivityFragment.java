@@ -33,7 +33,7 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
 
         getLoaderManager().initLoader(loader_id_edit, null, this);
 
-        return inflater.inflate(R.layout.fragment_entry_edit, container, false);
+        return inflater.inflate(R.layout.entry_detail_fragment, container, false);
 
 
 
@@ -42,8 +42,15 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+
         Intent intent = getActivity().getIntent();
-        if (intent != null) {
+               if (intent == null || intent.getData() == null) {
+                   return null;
+               }
+
+
+            if (intent != null) {
             Log.i("URI intent" ,intent.getDataString());
 
             Uri financeEntryWithID = intent.getData();
