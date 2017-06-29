@@ -20,7 +20,8 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
  */
 public class EntryDetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-
+    static final String ENTRYDETAIL_URI = "URI";
+    private Uri mUri;
 
     public EntryDetailActivityFragment() {
 
@@ -35,6 +36,15 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
 
         getLoaderManager().initLoader(loader_id_edit, null, this);
 
+
+
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            Log.i("URI Fragment" ,"Arguments Founded!");
+            mUri = arguments.getParcelable(EntryDetailActivityFragment.ENTRYDETAIL_URI);
+        }
+
+
         return inflater.inflate(R.layout.entry_detail_fragment, container, false);
 
 
@@ -46,18 +56,14 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
 
-        Intent intent = getActivity().getIntent();
-               if (intent == null || intent.getData() == null) {
-                   return null;
-               }
+        if ( null != mUri ) {
+            Log.i("URI from Latest" ,""+mUri);
 
-
-            if (intent != null) {
-            Log.i("URI intent" ,intent.getDataString());
-
-            Uri financeEntryWithID = intent.getData();
+            Uri financeEntryWithID = mUri;
             return new CursorLoader(getAppContext(),financeEntryWithID,null,null,null,null);
         }
+
+
         Log.i("URI intent" ,"Not Itent found");
         return null;
 

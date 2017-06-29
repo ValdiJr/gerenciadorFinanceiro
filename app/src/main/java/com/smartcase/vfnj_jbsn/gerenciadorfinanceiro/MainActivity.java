@@ -140,12 +140,13 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
     @Override
     public void onItemSelected(Uri contentUri) {
+        Log.i("onitemSelected on Main" ,"" + contentUri);
         if (mTwoPane) {
                         // In two-pane mode, show the detail view in this activity by
                                // adding or replacing the detail fragment using a
                                         // fragment transaction.
-                                                Bundle args = new Bundle();
-                        args.putParcelable(LatestsEntryFragment.ENTRYDETAIL_URI, contentUri);
+            Bundle args = new Bundle();
+            args.putParcelable(EntryDetailActivityFragment.ENTRYDETAIL_URI, contentUri);
 
             EntryDetailActivityFragment fragment = new EntryDetailActivityFragment();
                         fragment.setArguments(args);
@@ -154,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
                                         .replace(R.id.entry_detail_container, fragment, ENTRYDETAILFRAGMENT_TAG)
                                         .commit();
                     } else {
-                        Intent intent = new Intent(this, EntryDetailActivity.class)
-                                        .setData(contentUri);
+                        Log.i("One Panel Else: " ,"" + contentUri);
+                        Intent intent = new Intent(this, EntryDetailActivity.class).setData(contentUri);
                         startActivity(intent);
                     }
     }

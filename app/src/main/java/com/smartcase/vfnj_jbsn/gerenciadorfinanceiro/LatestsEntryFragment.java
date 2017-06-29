@@ -35,7 +35,7 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
 public class LatestsEntryFragment extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor>{
 
 
-    static final String ENTRYDETAIL_URI = "URI";
+
     public LatestsEntryFragment() {
     }
 
@@ -79,7 +79,9 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
                 if (c != null) {
                 Log.i("banco de dados", "" + position);
                 Uri financeEntryWithID = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
+
                 ((Callback) getActivity()).onItemSelected( financeEntryWithID );
+
                 }
 
             }

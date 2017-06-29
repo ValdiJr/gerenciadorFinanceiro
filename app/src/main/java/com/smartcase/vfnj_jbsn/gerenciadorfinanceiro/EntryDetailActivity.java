@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 public class EntryDetailActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -13,9 +14,23 @@ public class EntryDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         if (savedInstanceState == null) {
+
+                        // Create the detail fragment and add it to the activity
+                                // using a fragment transaction.
+
+                                                Bundle arguments = new Bundle();
+                        arguments.putParcelable(EntryDetailActivityFragment.ENTRYDETAIL_URI, getIntent().getData());
+
+            EntryDetailActivityFragment fragment = new EntryDetailActivityFragment();
+                        fragment.setArguments(arguments);
+
+
+
+
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.entry_detail_container, new EntryDetailActivityFragment())
+                    .add(R.id.entry_detail_container, fragment)
                     .commit();
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
