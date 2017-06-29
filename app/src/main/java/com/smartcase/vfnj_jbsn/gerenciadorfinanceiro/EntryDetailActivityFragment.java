@@ -25,6 +25,8 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
     public EntryDetailActivityFragment() {
 
     }
+
+
     private static final int loader_id_edit=2;
 
     @Override

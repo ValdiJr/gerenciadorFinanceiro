@@ -7,9 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,12 +23,22 @@ import java.util.Date;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LatestsEntryFragment.Callback{
 
+    private static final String ENTRYDETAILFRAGMENT_TAG = "EDFTAG";
     // Pega o FragmentManager
     FragmentManager fm = getSupportFragmentManager();
     // Abre uma transação e adiciona
+
     boolean mTwoPane;
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EntryDetailActivityFragment edf = (EntryDetailActivityFragment) getSupportFragmentManager().findFragmentByTag(ENTRYDETAILFRAGMENT_TAG);
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -48,9 +56,15 @@ public class MainActivity extends AppCompatActivity {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
+
+
+
+
+
             if (savedInstanceState == null) {
                 fm.beginTransaction()
-                        .replace(R.id.entry_detail_container, new GraficActivity())
+                        .replace(R.id.entry_detail_container, new EntryDetailActivityFragment(),
+                ENTRYDETAILFRAGMENT_TAG)
                         .commit();
             }
         } else {
@@ -115,12 +129,34 @@ public class MainActivity extends AppCompatActivity {
 //            FragmentTransaction ft = fm.beginTransaction();
 //            ft.remove(getSupportFragmentManager().findFragmentById(R.id.fragment_forecast)).commit();
 //            ft = fm.beginTransaction();
-//            ft.replace(R.id.fragment_forecast, new GraficActivity());
+//            ft.replace(R.id.fragment_forecast, new GraphicActivity());
 //            ft.addToBackStack(null);
 //            ft.commit();
 //            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(Uri contentUri) {
+        if (mTwoPane) {
+                        // In two-pane mode, show the detail view in this activity by
+                               // adding or replacing the detail fragment using a
+                                        // fragment transaction.
+                                                Bundle args = new Bundle();
+                        args.putParcelable(LatestsEntryFragment.ENTRYDETAIL_URI, contentUri);
+
+            EntryDetailActivityFragment fragment = new EntryDetailActivityFragment();
+                        fragment.setArguments(args);
+
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.entry_detail_container, fragment, ENTRYDETAILFRAGMENT_TAG)
+                                        .commit();
+                    } else {
+                        Intent intent = new Intent(this, EntryDetailActivity.class)
+                                        .setData(contentUri);
+                        startActivity(intent);
+                    }
     }
 }

@@ -34,8 +34,23 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
  */
 public class LatestsEntryFragment extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor>{
 
+
+    static final String ENTRYDETAIL_URI = "URI";
     public LatestsEntryFragment() {
     }
+
+    public interface Callback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+        public void onItemSelected(Uri dateUri);
+    }
+
+
+
+
+
+
     private FinanceEntryAdapter financeEntryAdapter;
     private static final int loader_id=1;
 
@@ -60,13 +75,12 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
                 // CursorAdapter returns a cursor at the correct position for getItem(), or null
                 // if it cannot seek to that position.
                 Cursor c = (Cursor) adapterView.getItemAtPosition(position);
+
+                if (c != null) {
                 Log.i("banco de dados", "" + position);
                 Uri financeEntryWithID = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
-
-
-                    Intent intent = new Intent(getActivity(), EntryDetailActivity.class)
-                            .setData(financeEntryWithID);
-                    startActivity(intent);
+                ((Callback) getActivity()).onItemSelected( financeEntryWithID );
+                }
 
             }
         });

@@ -29,9 +29,9 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract
 /**
  * A placeholder fragment containing a simple view.
  */
-public class GraficActivity extends Fragment {
+public class GraphicActivity extends Fragment {
 
-    public GraficActivity() {
+    public GraphicActivity() {
     }
 
     @Override
