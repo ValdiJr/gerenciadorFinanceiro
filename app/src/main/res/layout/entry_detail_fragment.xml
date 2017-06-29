@@ -8,7 +8,7 @@
     >
 
     <TextView
-        android:id="@+id/valueTextView"
+        android:id="@+id/valueTextViewDetailFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ems="10"

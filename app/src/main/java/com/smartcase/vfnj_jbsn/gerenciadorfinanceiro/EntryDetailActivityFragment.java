@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
@@ -23,6 +24,7 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
     static final String ENTRYDETAIL_URI = "URI";
     private Uri mUri;
 
+    TextView tv;
     public EntryDetailActivityFragment() {
 
     }
@@ -44,8 +46,10 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
             mUri = arguments.getParcelable(EntryDetailActivityFragment.ENTRYDETAIL_URI);
         }
 
+        View view = inflater.inflate(R.layout.entry_detail_fragment, container, false);
+        tv = (TextView) view.findViewById(R.id.valueTextViewDetailFragment);
 
-        return inflater.inflate(R.layout.entry_detail_fragment, container, false);
+        return view;
 
 
 
@@ -71,9 +75,10 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        String data="";
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                String data = String.valueOf(cursor.getInt(0));
+                data = String.valueOf(cursor.getInt(0));
                 data = data +"\n"+String.valueOf(cursor.getLong(1));
                 data = data +"\n"+String.valueOf(cursor.getString(2));
                 data = data +"\n"+String.valueOf(cursor.getString(3));
@@ -84,6 +89,8 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
                 cursor.moveToNext();
             }
         }
+
+        tv.setText(data);
     }
 
     @Override
