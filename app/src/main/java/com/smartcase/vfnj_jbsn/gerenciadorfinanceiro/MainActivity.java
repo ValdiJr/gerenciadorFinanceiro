@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,13 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+
+
+
+
         if (findViewById(R.id.entry_detail_container) != null) {
             Log.i("Detect double panel","Tem dois paineis" );
             // The detail container view will be present only in the large-screen layouts

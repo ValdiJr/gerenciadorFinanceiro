@@ -34,7 +34,7 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
  */
 public class LatestsEntryFragment extends Fragment implements  LoaderManager.LoaderCallbacks<Cursor>{
 
-
+    static int LATEST_ENTRIES_URI;
 
     public LatestsEntryFragment() {
     }
@@ -46,11 +46,16 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
         public void onItemSelected(Uri dateUri);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+
+
+    }
 
 
 
-
-
+    private ListView listView;
     private FinanceEntryAdapter financeEntryAdapter;
     private static final int loader_id=1;
 
@@ -62,8 +67,9 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
 
         getLoaderManager().initLoader(loader_id, null, this);
 
+
         financeEntryAdapter = new FinanceEntryAdapter(getAppContext(),null,0);
-        ListView listView = (ListView) view.findViewById(R.id.listview_forecast);
+        listView = (ListView) view.findViewById(R.id.listview_forecast);
         listView.setAdapter(financeEntryAdapter);
 
 
@@ -75,12 +81,15 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
                 // CursorAdapter returns a cursor at the correct position for getItem(), or null
                 // if it cannot seek to that position.
                 Cursor c = (Cursor) adapterView.getItemAtPosition(position);
+                LATEST_ENTRIES_URI=position;
 
                 if (c != null) {
                 Log.i("banco de dados", "" + position);
                 Uri financeEntryWithID = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
 
                 ((Callback) getActivity()).onItemSelected( financeEntryWithID );
+
+
 
                 }
 
@@ -95,6 +104,35 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putInt("Position", LATEST_ENTRIES_URI);
+
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState); // Always call the superclass first
+
+        // Check whether we're recreating a previously destroyed instance
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            LATEST_ENTRIES_URI = savedInstanceState.getInt("Position");
+
+        } else {
+            LATEST_ENTRIES_URI=0;
+        }
+
+    }
+
+
+
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-28");
         return new CursorLoader(getAppContext(),financeEntryWithdate,null,null,null,null);
@@ -105,6 +143,16 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         financeEntryAdapter.swapCursor(data);
+        // Check whether we're recreating a previously destroyed instance
+
+            // Restore value of members from saved state
+        if(LATEST_ENTRIES_URI!=0) {
+            listView.smoothScrollToPosition(LATEST_ENTRIES_URI);
+        }
+
+
+
+
     }
 
     @Override
