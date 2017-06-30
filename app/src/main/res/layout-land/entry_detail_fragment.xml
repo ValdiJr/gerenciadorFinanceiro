@@ -13,13 +13,13 @@
         android:layout_height="match_parent"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="PHONE" />
+        android:text="TABLET MODE - LAND" />
     <TextView
         android:id="@+id/valueTextViewDetailFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ems="10"
         android:inputType="textPersonName"
-        />
+   />
 
 </android.support.constraint.ConstraintLayout>
