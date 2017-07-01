@@ -1,3 +1,26 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+<TextView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:text="Today"
+    android:textColor="#ffffff"
+    android:textSize="22sp"
+    android:textStyle="bold"
+    android:background="#AFA7EF"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,7 +49,7 @@
         android:layout_weight="4" />
 
 </LinearLayout>
-
+</LinearLayout>
 
 
 

@@ -23,7 +23,8 @@
             android:id="@+id/list_item_entryfinance_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tomorrow"/>
+            android:text="Tomorrow"
+            android:textSize="22sp"/>
 
         <TextView
             android:id="@+id/list_item_detail"
@@ -42,7 +43,8 @@
             android:id="@+id/list_item_high_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0.0"/>
+            android:text="0.0"
+            android:textSize="22sp"/>
 
         <TextView
             android:id="@+id/list_item_low_textview"

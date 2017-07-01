@@ -22,6 +22,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+
     <include layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
@@ -33,6 +35,7 @@
         app:backgroundTint="#68046C"
         app:srcCompat="@android:drawable/ic_input_add"
         android:tint="@android:color/white"
+        android:layout_margin="10dp"
         />
 
 
