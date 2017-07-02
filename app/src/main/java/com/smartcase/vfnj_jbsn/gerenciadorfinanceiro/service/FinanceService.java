@@ -118,7 +118,7 @@ public class FinanceService extends IntentService {
         @Override
         public void onReceive(Context context, Intent intent) {
             Intent sendIntent = new Intent(context, FinanceService.class);
-            //  sendIntent.putExtra(SunshineService.LOCATION_QUERY_EXTRA, intent.getStringExtra(SunshineService.LOCATION_QUERY_EXTRA));
+            sendIntent.putExtra(FINANCE_QUERY_EXTRA, intent.getStringExtra(FINANCE_QUERY_EXTRA));
             context.startService(sendIntent);
 
         }
