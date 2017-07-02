@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.service.FinanceService;
 
 import java.util.Date;
 
@@ -134,6 +135,13 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+
+            Intent intent = new Intent(this, FinanceService.class);
+            intent.putExtra(FinanceService.FINANCE_QUERY_EXTRA,
+                    "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22)&" +
+                            "format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=");
+            this.startService(intent);
 //            FragmentTransaction ft = fm.beginTransaction();
 //            ft.remove(getSupportFragmentManager().findFragmentById(R.id.fragment_forecast)).commit();
 //            ft = fm.beginTransaction();

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -13,17 +16,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBarLogo"
-
-            >
-
+            android:theme="@style/AppTheme.NoActionBarLogo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".AddEntryActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,6 +42,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
         </activity>
+
+        <service
+            android:name=".service.FinanceService"
+            android:exported="false"></service>
+        <receiver android:name=".service.FinanceService$AlarmReceiver" android:enabled="true"/>
     </application>
 
 </manifest>
