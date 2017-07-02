@@ -1,9 +1,6 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -21,7 +18,7 @@ import android.view.MenuItem;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.service.FinanceService;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.sync.ManagerFinanceSyncAdapter;
 
 import java.util.Date;
 
@@ -138,17 +135,19 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent alarmIntent = new Intent(this, FinanceService.AlarmReceiver.class);
-            alarmIntent.putExtra(FinanceService.FINANCE_QUERY_EXTRA,"https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22)&" +
-                           "format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=" );
 
-            //Wrap in a pending intent which only fires once.
-            PendingIntent pi = PendingIntent.getBroadcast(this, 0,alarmIntent,PendingIntent.FLAG_ONE_SHOT);//getBroadcast(context, 0, i, 0);
-
-            AlarmManager am=(AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
-
-            //Set the AlarmManager to wake up the system.
-            am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, pi);
+            ManagerFinanceSyncAdapter.syncImmediately(this);
+//            Intent alarmIntent = new Intent(this, FinanceService.AlarmReceiver.class);
+//            alarmIntent.putExtra(FinanceService.FINANCE_QUERY_EXTRA,"https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22)&" +
+//                           "format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=" );
+//
+//            //Wrap in a pending intent which only fires once.
+//            PendingIntent pi = PendingIntent.getBroadcast(this, 0,alarmIntent,PendingIntent.FLAG_ONE_SHOT);//getBroadcast(context, 0, i, 0);
+//
+//            AlarmManager am=(AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+//
+//            //Set the AlarmManager to wake up the system.
+//            am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 5000, pi);
 
 //            Intent intent = new Intent(this, FinanceService.class);
 //            intent.putExtra(FinanceService.FINANCE_QUERY_EXTRA,

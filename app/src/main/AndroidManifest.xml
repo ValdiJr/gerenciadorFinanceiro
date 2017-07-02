@@ -2,6 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro">
 
+
+    <uses-permission
+        android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"
+        android:maxSdkVersion="22" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -29,9 +40,11 @@
                 android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
         </activity>
 
-        <provider
-            android:name=".data.ManagerContentProvider"
-            android:authorities="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro" />
+        <!--<provider-->
+            <!--android:name=".data.ManagerContentProvider"-->
+            <!--android:authorities="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro" />-->
+
+
 
         <activity
             android:name=".EntryDetailActivity"
@@ -43,10 +56,45 @@
                 android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
         </activity>
 
+        <!--<service-->
+            <!--android:name=".service.FinanceService"-->
+            <!--android:exported="false"></service>-->
+        <!--<receiver android:name=".service.FinanceService$AlarmReceiver" android:enabled="true"/>-->
+
+        <!-- SyncAdapter's dummy authentication service -->
         <service
-            android:name=".service.FinanceService"
-            android:exported="false"></service>
-        <receiver android:name=".service.FinanceService$AlarmReceiver" android:enabled="true"/>
+            android:name="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.sync.ManagerFinanceAuthenticatorService"
+            >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+
+        <provider
+            android:authorities="@string/content_authority"
+            android:name=".data.ManagerContentProvider"
+            android:exported="false"
+            android:syncable="true" />
+
+
+
+
+        <!-- The SyncAdapter service -->
+        <service
+            android:name=".sync.ManagerFinanceSyncService"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
+
     </application>
 
 </manifest>
