@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
 
 
-
+        ManagerFinanceSyncAdapter.initializeSyncAdapter(this);
 
 
 
@@ -138,8 +138,7 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
             ManagerFinanceSyncAdapter.syncImmediately(this);
 //            Intent alarmIntent = new Intent(this, FinanceService.AlarmReceiver.class);
-//            alarmIntent.putExtra(FinanceService.FINANCE_QUERY_EXTRA,"https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22)&" +
-//                           "format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=" );
+//            alarmIntent.putExtra(FinanceService.FINANCE_QUERY_EXTRA,"https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22)&"format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=" );
 //
 //            //Wrap in a pending intent which only fires once.
 //            PendingIntent pi = PendingIntent.getBroadcast(this, 0,alarmIntent,PendingIntent.FLAG_ONE_SHOT);//getBroadcast(context, 0, i, 0);

@@ -12,7 +12,7 @@
     </string-array>
     <string name="title_activity_entry_edit">EntryEditActivity</string>
     <!-- SyncAdapter related -->
-    <string name="sync_account_type">smartcase.vfnj_jbsn.gerenciadorfinanceir</string>
+    <string name="sync_account_type">smartcase.vfnj_jbsn.gerenciadorfinanceiro</string>
     <string name="content_authority">com.smartcase.vfnj_jbsn.gerenciadorfinanceiro</string>
 
 

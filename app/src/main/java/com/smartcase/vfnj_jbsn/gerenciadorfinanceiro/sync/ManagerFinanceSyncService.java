@@ -11,7 +11,7 @@ public class ManagerFinanceSyncService extends Service {
 
     @Override
     public void onCreate() {
-        Log.d("ManagerFinanceSyncService", "onCreate - ManagerFinanceSyncService");
+        Log.d("MFSyncService", "onCreate - ManagerFinanceSyncService");
         synchronized (sSyncAdapterLock) {
             if (sManagerFinanceSyncAdapter == null) {
                 sManagerFinanceSyncAdapter = new ManagerFinanceSyncAdapter(getApplicationContext(), true);

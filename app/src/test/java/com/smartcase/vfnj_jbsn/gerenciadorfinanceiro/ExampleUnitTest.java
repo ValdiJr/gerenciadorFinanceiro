@@ -145,7 +145,7 @@ import static org.junit.Assert.*;
 //        FinanceEntry entry = new FinanceEntry();
 //
 //                entry.setValueEntry(9.70);
-//                entry.setCategoryEntry("Lanche");
+//                entry.setCategoryEntry("Casa/Trabalho/Lazer");
 //                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
 //                entry.setDescriptionEntry("Coxinha");
 //                ContentValues values = ManagerDbUtils.writeEntry(entry);
