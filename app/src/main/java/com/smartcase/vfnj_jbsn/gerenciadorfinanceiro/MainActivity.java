@@ -2,6 +2,7 @@ package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.DummyData;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
@@ -51,10 +53,10 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         setSupportActionBar(toolbar);
 
 
-
+        //DummyData.generateDummyEntries();
         ManagerFinanceSyncAdapter.initializeSyncAdapter(this);
 
-
+//
 
         if (findViewById(R.id.entry_detail_container) != null) {
             Log.i("Detect double panel","Tem dois paineis" );
@@ -96,22 +98,11 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplication(), AddEntryActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplication(), AddEntryActivity.class);
+                startActivity(intent);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 
-                FinanceEntry entry = new FinanceEntry();
-
-                entry.setValueEntry(9.70);
-                entry.setCategoryEntry("Lanche");
-                entry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
-                entry.setDescriptionEntry("Coxinha");
-                ContentValues values = ManagerDbUtils.writeEntry(entry);
-                Uri financeEntryWriteUri = ManagerContract.FinanceEntry.buildNewEntry();
-                Uri uriResponde = getAppContext().getContentResolver().insert(financeEntryWriteUri,values);
-
-                Log.i("Banco de DADOS", "ID: "+ uriResponde );
 
             }
         });

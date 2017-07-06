@@ -19,6 +19,7 @@ public class ManagerContract {
     public static final String PATH_ENTRY = "entry";
     public static final String PATH_ENTRY_DATE = PATH_ENTRY+"/date";
     public static final String PATH_ENTRY_ID = PATH_ENTRY+"/id";
+
     public static final class FinanceEntry implements BaseColumns {
 
 
@@ -51,6 +52,9 @@ public class ManagerContract {
         public static Uri buildNewEntry() {
             return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).build();
         }
+        public static Uri buildEntryAll() {
+            return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("all").build();
+        }
 
 
 
@@ -68,5 +72,6 @@ public class ManagerContract {
         public static final String COLUMN_ENTRY_DATA = "entry_data";
         public static final String COLUMN_ENTRY_DESCRIPTION = "entry_description";
         public static final String COLUMN_ENTRY_CATEGORY = "entry_category";
+        public static final String COLUMN_ENTRY_MONTH = "entry_month";
     }
 }

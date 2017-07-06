@@ -30,6 +30,7 @@ public class ManagerContentProvider extends ContentProvider {
     static final int ENTRY_WITH_DATE = 101;
     static final int ENTRY = 100;
     static final int ENTRY_WITH_ID = 102;
+    static final int ENTRY_ALL = 103;
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
     static UriMatcher buildUriMatcher() {
@@ -38,6 +39,7 @@ public class ManagerContentProvider extends ContentProvider {
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY_DATE+"/*", ENTRY_WITH_DATE);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY, ENTRY);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY_ID+"/#", ENTRY_WITH_ID);
+        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY+"/all", ENTRY_ALL);
         return matcher;
     }
 
@@ -65,6 +67,11 @@ public class ManagerContentProvider extends ContentProvider {
             case ENTRY_WITH_ID: {
                 Log.i("ENTRY_WITH_ID", String.valueOf(uri) +" "+sUriMatcher.match(uri));
                 retCursor = ManagerDbUtils.getEntryByID(uri, projection, sortOrder);
+                break;
+            }
+            case ENTRY_ALL: {
+                Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
+                retCursor = ManagerDbUtils.selectAllEntry();
                 break;
             }
             default:

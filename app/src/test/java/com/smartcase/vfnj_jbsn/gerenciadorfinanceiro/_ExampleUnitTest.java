@@ -16,6 +16,26 @@ import static org.junit.Assert.*;
 //    }
 //}
 
+
+// Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-07-05");
+//    Cursor cursor = getAppContext().getContentResolver().query(financeEntryWithdate,null, null, null, null);
+//
+//
+//          if (cursor.moveToFirst()) {
+//              while (!cursor.isAfterLast()) {
+//                  String data = String.valueOf(cursor.getInt(0));
+//                  data = data + "\n" + String.valueOf(cursor.getLong(1));
+//                  data = data + "\n" + String.valueOf(cursor.getString(2));
+//                  data = data + "\n" + String.valueOf(cursor.getString(3));
+//                  data = data + "\n" + String.valueOf(cursor.getString(4));
+//                  data = data + "\n" + String.valueOf(cursor.getString(5));
+//
+//
+//                  Log.i("banco de dados", "" + data);
+//                  cursor.moveToNext();
+//              }
+//          }
+
 //Teste com UriMatchers
 
 //    FinanceEntry entry = new FinanceEntry();

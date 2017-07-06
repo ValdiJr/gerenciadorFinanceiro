@@ -56,7 +56,8 @@ public class ManagerDbUtils {
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE,
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA,
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION,
-                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH
         };
 
         Cursor c = db.query(
@@ -97,7 +98,8 @@ public class ManagerDbUtils {
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE,
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA,
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION,
-                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH
         };
 
         Cursor c = db.query(
@@ -124,6 +126,7 @@ public class ManagerDbUtils {
         values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA, financeEntry.getDataEntry());
         values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION, financeEntry.getDescriptionEntry());
         values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY, financeEntry.getCategoryEntry());
+        values.put(ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH,financeEntry.getDataEntry().substring(0,7));
 
         return values;
         //return sqLiteDatabase.insert(ManagerContract.FinanceEntry.TABLE_NAME, null, values);
@@ -140,7 +143,8 @@ public class ManagerDbUtils {
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE,
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA,
                 ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION,
-                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH
         };
 
 

@@ -1,5 +1,7 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
+import android.content.ContentValues;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
@@ -12,10 +14,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
 
 import java.util.Date;
+
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
 public class AddEntryActivity extends AppCompatActivity {
 
@@ -58,8 +63,11 @@ public class AddEntryActivity extends AppCompatActivity {
                 FinanceEntry financeEntry = new FinanceEntry();
                 financeEntry.setDataEntry(ManagerDbUtils.convertDate(new Date()));
                 financeEntry.setDescriptionEntry(String.valueOf(descriptionEditText.getText()));
-                financeEntry.setValueEntry(Double.parseDouble((String.valueOf(entryValueEditText.getText()))));
+                financeEntry.setValueEntry(Double.parseDouble((String.valueOf(entryValueEditText.getText())).replace(",",".")));
                 financeEntry.setCategoryEntry(spinner.getItemAtPosition(spinner.getSelectedItemPosition()).toString());
+                ContentValues values = ManagerDbUtils.writeEntry(financeEntry);
+                Uri financeEntryWriteUri = ManagerContract.FinanceEntry.buildNewEntry();
+                getAppContext().getContentResolver().insert(financeEntryWriteUri, values);
 
             }
         });

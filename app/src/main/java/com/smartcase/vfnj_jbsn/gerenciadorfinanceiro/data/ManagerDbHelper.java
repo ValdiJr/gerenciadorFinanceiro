@@ -28,7 +28,8 @@ public class ManagerDbHelper extends SQLiteOpenHelper {
                 FinanceEntry.COLUMN_ENTRY_VALUE + " REAL NOT NULL, " +
                 FinanceEntry.COLUMN_ENTRY_DATA + " TEXT NOT NULL, " +
                 FinanceEntry.COLUMN_ENTRY_DESCRIPTION + " TEXT NOT NULL, " +
-                FinanceEntry.COLUMN_ENTRY_CATEGORY + " TEXT NOT NULL " +
+                FinanceEntry.COLUMN_ENTRY_CATEGORY + " TEXT NOT NULL, " +
+                FinanceEntry.COLUMN_ENTRY_MONTH + " TEXT NOT NULL " +
                 ");";
         sqLiteDatabase.execSQL(SQL_CREATE_FINANCE_ENTRY_TABLE);
 //

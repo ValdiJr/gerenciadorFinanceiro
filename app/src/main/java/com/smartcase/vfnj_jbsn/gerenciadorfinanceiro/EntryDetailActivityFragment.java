@@ -24,7 +24,10 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
     static final String ENTRYDETAIL_URI = "URI";
     private Uri mUri;
 
-    TextView tv;
+    TextView tvDescription;
+    TextView tvValue;
+    TextView tvCategory;
+    TextView tvDate;
     public EntryDetailActivityFragment() {
 
     }
@@ -47,7 +50,11 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
         }
 
         View view = inflater.inflate(R.layout.entry_detail_fragment, container, false);
-        tv = (TextView) view.findViewById(R.id.valueTextViewDetailFragment);
+
+        tvDescription = (TextView) view.findViewById(R.id.viewEntryDescription);
+        tvValue = (TextView) view.findViewById(R.id.viewEntryValue);
+        tvDate = (TextView) view.findViewById(R.id.viewEntryData);
+        tvCategory = (TextView) view.findViewById(R.id.viewEntryCategory);
 
         return view;
 
@@ -78,19 +85,16 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
         String data="";
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                data = String.valueOf(cursor.getInt(0));
-                data = data +"\n"+String.valueOf(cursor.getLong(1));
-                data = data +"\n"+String.valueOf(cursor.getString(2));
-                data = data +"\n"+String.valueOf(cursor.getString(3));
-                data = data +"\n"+String.valueOf(cursor.getString(4));
+                //data = String.valueOf(cursor.getInt(0));
+                tvValue.setText(String.valueOf(cursor.getDouble(1)));
+                tvDate.setText(String.valueOf(cursor.getString(2)));
+                tvDescription.setText(String.valueOf(cursor.getString(3)));
+                tvCategory.setText(String.valueOf(cursor.getString(4)));
 
-
-                Log.i("banco de dados", "" + data);
                 cursor.moveToNext();
             }
         }
 
-        tv.setText(data);
     }
 
     @Override

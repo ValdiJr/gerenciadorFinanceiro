@@ -132,9 +132,12 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate("2017-06-28");
+
+        Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate(ManagerDbUtils.convertDate(new Date()));
+       // Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryAll();
         return new CursorLoader(getAppContext(),financeEntryWithdate,null,null,null,null);
     }
 
