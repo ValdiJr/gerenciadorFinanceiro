@@ -12,7 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
@@ -24,6 +27,7 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
     static final String ENTRYDETAIL_URI = "URI";
     private Uri mUri;
 
+    private int entryID;
     TextView tvDescription;
     TextView tvValue;
     TextView tvCategory;
@@ -56,6 +60,20 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
         tvDate = (TextView) view.findViewById(R.id.viewEntryData);
         tvCategory = (TextView) view.findViewById(R.id.viewEntryCategory);
 
+        Button excluirButton = (Button) view.findViewById(R.id.buttonExcluir);
+        excluirButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Uri financeEntryWriteUri = ManagerContract.FinanceEntry.buildNewEntry();
+                String selection = ManagerContract.FinanceEntry._ID+ " = ? ";
+                String [] valores = {String.valueOf(entryID)};
+                getAppContext().getContentResolver().delete(financeEntryWriteUri,selection, new String[]{String.valueOf(entryID)});
+                Intent intent = new Intent(MyApplication.getAppContext(), MainActivity.class);
+                startActivity(intent);
+            }});
+
         return view;
 
 
@@ -85,7 +103,7 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
         String data="";
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                //data = String.valueOf(cursor.getInt(0));
+                entryID= cursor.getInt(0);
                 tvValue.setText(String.valueOf(cursor.getDouble(1)));
                 tvDate.setText(String.valueOf(cursor.getString(2)));
                 tvDescription.setText(String.valueOf(cursor.getString(3)));

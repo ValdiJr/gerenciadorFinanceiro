@@ -87,6 +87,7 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
                 Log.i("banco de dados", "" + position);
                 Uri financeEntryWithID = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
 
+
                 ((Callback) getActivity()).onItemSelected( financeEntryWithID );
 
 
