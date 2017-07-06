@@ -1,6 +1,7 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -68,6 +69,8 @@ public class AddEntryActivity extends AppCompatActivity {
                 ContentValues values = ManagerDbUtils.writeEntry(financeEntry);
                 Uri financeEntryWriteUri = ManagerContract.FinanceEntry.buildNewEntry();
                 getAppContext().getContentResolver().insert(financeEntryWriteUri, values);
+                Intent intent = new Intent(getApplication(), MainActivity.class);
+                startActivity(intent);
 
             }
         });

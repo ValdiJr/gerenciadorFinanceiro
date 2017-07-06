@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 public class EntryDetailActivity extends AppCompatActivity {
 
+    public static final String ENTRYEDITFRAGMENT_TAG = "EEFTAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

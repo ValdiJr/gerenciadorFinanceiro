@@ -139,7 +139,8 @@ public class LatestsEntryFragment extends Fragment implements  LoaderManager.Loa
 
         Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryWithDate(ManagerDbUtils.convertDate(new Date()));
        // Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryAll();
-        return new CursorLoader(getAppContext(),financeEntryWithdate,null,null,null,null);
+        String order = ManagerContract.FinanceEntry._ID + " DESC";
+        return new CursorLoader(getAppContext(),financeEntryWithdate,null,null,null,order);
     }
 
 

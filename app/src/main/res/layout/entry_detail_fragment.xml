@@ -8,9 +8,11 @@
     >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
 
         <LinearLayout
             android:paddingTop="30dp"
@@ -86,11 +88,18 @@
             android:inputType="textPersonName"
 
             />
+
         <Button
             android:id="@+id/buttonExcluir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Excluir" />
+        />
+        <Button
+            android:id="@+id/buttonEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar" />
 
 
     </LinearLayout>

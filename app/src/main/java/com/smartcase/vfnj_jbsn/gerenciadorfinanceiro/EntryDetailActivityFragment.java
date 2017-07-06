@@ -68,10 +68,29 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
 
                 Uri financeEntryWriteUri = ManagerContract.FinanceEntry.buildNewEntry();
                 String selection = ManagerContract.FinanceEntry._ID+ " = ? ";
-                String [] valores = {String.valueOf(entryID)};
+
                 getAppContext().getContentResolver().delete(financeEntryWriteUri,selection, new String[]{String.valueOf(entryID)});
                 Intent intent = new Intent(MyApplication.getAppContext(), MainActivity.class);
                 startActivity(intent);
+            }});
+
+
+        Button editarButton = (Button) view.findViewById(R.id.buttonEdit);
+        editarButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Bundle args = new Bundle();
+                args.putParcelable(EntryEditActivityFragment.ENTRYEDIT_URI, mUri);
+
+                EntryEditActivityFragment fragment = new EntryEditActivityFragment ();
+                fragment.setArguments(args);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.entry_detail_container, fragment, EntryDetailActivity.ENTRYEDITFRAGMENT_TAG)
+                        .commit();
+
             }});
 
         return view;
