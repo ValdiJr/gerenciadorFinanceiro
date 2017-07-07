@@ -11,12 +11,12 @@
     </style>
 
 
-
     <style name="AppTheme.NoActionBar">
         <item name="displayOptions">useLogo|showHome</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.NoActionBarLogo">
         <item name="displayOptions">useLogo|showHome</item>
         <item name="logo">@mipmap/icon_pig</item>

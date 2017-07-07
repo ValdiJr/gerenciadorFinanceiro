@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.DummyData;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic.MonthActivity;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.sync.ManagerFinanceSyncAdapter;
 
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         setSupportActionBar(toolbar);
 
 
-        //DummyData.generateDummyEntries();
+        DummyData.generateDummyEntries();
         ManagerFinanceSyncAdapter.initializeSyncAdapter(this);
 
 //
@@ -127,7 +128,9 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            ManagerFinanceSyncAdapter.syncImmediately(this);
+            Intent intent = new Intent(this, MonthActivity.class);
+            startActivity(intent);
+ //           ManagerFinanceSyncAdapter.syncImmediately(this);
 //            Intent alarmIntent = new Intent(this, FinanceService.AlarmReceiver.class);
 //            alarmIntent.putExtra(FinanceService.FINANCE_QUERY_EXTRA,"https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22)&"format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=" );
 //
