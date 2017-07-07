@@ -81,8 +81,8 @@ public class MonthActivityFragment extends Fragment implements LoaderManager.Loa
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri financeEntryAll = ManagerContract.FinanceEntry.buildEntryAll();
-        // Uri financeEntryWithdate = ManagerContract.FinanceEntry.buildEntryAll();
+
+        Uri financeEntryAll = ManagerContract.FinanceEntry.buildSelectAllMonthsDistict();
         String order = ManagerContract.FinanceEntry._ID + " DESC";
         return new CursorLoader(getAppContext(),financeEntryAll,null,null,null,order);
     }

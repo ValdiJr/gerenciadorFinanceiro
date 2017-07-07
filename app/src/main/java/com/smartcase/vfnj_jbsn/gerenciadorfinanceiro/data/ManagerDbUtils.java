@@ -158,7 +158,56 @@ public class ManagerDbUtils {
                 null                                 // The sort order
         );
         return c;
+
     }
+
+    public static Cursor selectAllMonthsDistict (){
+
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase sqLiteDatabase = managerDbHelper.getReadableDatabase();
+
+// Define a projection that specifies which columns from the database
+// you will actually use after this query.
+
+        String[] projection = {
+                ManagerContract.FinanceEntry._ID,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY,
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH
+        };
+
+        Cursor c = sqLiteDatabase.query(
+                true,
+                ManagerContract.FinanceEntry.TABLE_NAME,                     // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                null,                                 // The sort order
+                null
+        );
+
+        return c;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static String convertDate (Date date) {
 
         TimeZone tz = TimeZone.getTimeZone("Brazil/East");

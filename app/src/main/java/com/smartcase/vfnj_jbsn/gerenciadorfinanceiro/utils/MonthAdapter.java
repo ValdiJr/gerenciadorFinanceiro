@@ -70,6 +70,35 @@ public class MonthAdapter extends CursorAdapter {
 //        viewHolder.descriptionEntryView.setText(cursor.getString(3));
 
  //       TextView categoryEntryView = (TextView) view.findViewById(R.id.list_item_month_textview);
-        viewHolder.monthView.setText(cursor.getString(5));
+
+        String ano = (cursor.getString(5)).substring(0,4);
+        switch ((cursor.getString(5)).substring(5,7)){
+            case "01":
+                viewHolder.monthView.setText(ano+" Janeiro");
+                break;
+            case "02":
+                viewHolder.monthView.setText(ano+" Fevereiro");
+                break;
+            case "03":
+                viewHolder.monthView.setText(ano+" Março");
+                break;
+            case "04":
+                viewHolder.monthView.setText(ano+" Abril");
+                break;
+            case "05":
+                viewHolder.monthView.setText(ano+" Maio");
+                break;
+            case "06":
+                viewHolder.monthView.setText(ano+" Junho");
+                break;
+            case "07":
+                viewHolder.monthView.setText(ano+" Julho");
+                break;
+            default:
+                viewHolder.monthView.setText(ano+" Desconhedido");
+
+
+        }
+
     }
 }
