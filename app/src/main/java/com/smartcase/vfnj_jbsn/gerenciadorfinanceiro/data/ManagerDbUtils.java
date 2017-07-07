@@ -195,6 +195,28 @@ public class ManagerDbUtils {
 
     }
 
+    public static Cursor selectAllSumCategoriesMonths (){
+
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase sqLiteDatabase = managerDbHelper.getReadableDatabase();
+
+        String[] selectionArgs;
+        String selection;
+        selection = ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH+ " = ? ";
+        selectionArgs = new String[]{"2007-04"};
+
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT SUM("+ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE+") AS somas, " +ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY+ " AS categorias"
+                +" FROM "+ManagerContract.FinanceEntry.TABLE_NAME
+                +" WHERE "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH + " like '2017-04' "
+                +" GROUP BY "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY, null);
+
+
+        return c;
+
+
+    }
+
 
 
 

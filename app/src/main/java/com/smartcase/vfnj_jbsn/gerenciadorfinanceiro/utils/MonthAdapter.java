@@ -2,6 +2,7 @@ package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.utils;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +90,7 @@ public class MonthAdapter extends CursorAdapter {
                 viewHolder.monthView.setText(ano+" Maio");
                 break;
             case "06":
+                Log.i("Mês",""+cursor.getString(5));
                 viewHolder.monthView.setText(ano+" Junho");
                 break;
             case "07":

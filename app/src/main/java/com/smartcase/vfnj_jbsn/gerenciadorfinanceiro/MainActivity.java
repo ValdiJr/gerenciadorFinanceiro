@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         setSupportActionBar(toolbar);
 
 
-        DummyData.generateDummyEntries();
+        //DummyData.generateDummyEntries();
         ManagerFinanceSyncAdapter.initializeSyncAdapter(this);
 
 //
