@@ -15,6 +15,7 @@
     <string name="sync_account_type">smartcase.vfnj_jbsn.gerenciadorfinanceiro</string>
     <string name="content_authority">com.smartcase.vfnj_jbsn.gerenciadorfinanceiro</string>
     <string name="title_activity_month">MonthActivity</string>
+    <string name="title_activity_month_graphic">MonthGraphicActivity</string>
 
 
 </resources>

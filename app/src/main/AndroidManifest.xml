@@ -23,7 +23,6 @@
         android:roundIcon="@mipmap/icon_pig"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -39,10 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
         </activity>
-
-
         <activity android:name=".graphic.MonthActivity">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
@@ -98,8 +94,15 @@
                 android:resource="@xml/syncadapter" />
         </service>
 
-
-
+        <activity
+            android:name=".graphic.MonthGraphicActivity"
+            android:label="@string/title_activity_month_graphic"
+            android:parentActivityName=".graphic.MonthActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic.MonthActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -20,6 +20,7 @@ public class ManagerContract {
     public static final String PATH_ENTRY_DATE = PATH_ENTRY+"/date";
     public static final String PATH_ENTRY_ID = PATH_ENTRY+"/id";
     public static final String PATH_MONTHS_DISTINCTS = PATH_ENTRY+"/months-distinct";
+    public static final String PATH_SUM_CAT_MONTH = PATH_ENTRY+"/sum-category-month";
 
     public static final class FinanceEntry implements BaseColumns {
 
@@ -37,7 +38,7 @@ public class ManagerContract {
         }
 
         public static Uri buildEntryWithDate(String date) {
-            return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("date") .appendPath(date).build();
+            return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("date").appendPath(date).build();
         }
         public static String getDataEntryFromUri(Uri uri) {
             Log.i("Uri Segment", uri.getPathSegments().get(2));
@@ -56,12 +57,15 @@ public class ManagerContract {
         public static Uri buildEntryAll() {
             return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("all").build();
         }
-        public static Uri buildEntry() {
-            return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("all").build();
-        }
 
         public static Uri buildSelectAllMonthsDistict() {
             return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("months-distinct").build();
+        }
+        public static Uri buildSumCategoriesByMonth(String date) {
+            return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("sum-category-month").appendPath(date).build();
+        }
+        public static String getMonthFromUri(Uri uri) {
+            return uri.getPathSegments().get(2);
         }
 
 
