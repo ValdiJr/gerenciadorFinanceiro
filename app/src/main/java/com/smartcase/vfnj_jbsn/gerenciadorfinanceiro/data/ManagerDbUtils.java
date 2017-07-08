@@ -201,10 +201,6 @@ public class ManagerDbUtils {
         SQLiteDatabase sqLiteDatabase = managerDbHelper.getReadableDatabase();
 
         String month = ManagerContract.FinanceEntry.getMonthFromUri(uri);
-        String[] selectionArgs;
-        String selection;
-        selection = ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH+ " = ? ";
-        selectionArgs = new String[]{"2007-04"};
 
 
         Cursor c = sqLiteDatabase.rawQuery("SELECT SUM("+ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE+") AS somas, " +ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY+ " AS categorias"
@@ -219,6 +215,27 @@ public class ManagerDbUtils {
     }
 
 
+    public static Cursor selectAllSumCategoriesByDaysofMonth(Uri uri, String[] projection, String sortOrder){
+
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase sqLiteDatabase = managerDbHelper.getReadableDatabase();
+
+        String month = ManagerContract.FinanceEntry.getMonthFromUri(uri);
+
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT SUM("+ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE+") AS somas, "
+                +ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY+ " AS categorias, "
+                +ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA + " AS dias"
+                +" FROM "+ManagerContract.FinanceEntry.TABLE_NAME
+                +" WHERE "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH + " like '"+month+"' "
+                +" GROUP BY "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY +","+
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA, null);
+
+
+        return c;
+
+
+    }
 
 
 

@@ -1,16 +1,14 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.R;
 
 public class MonthGraphicActivity extends AppCompatActivity {
 
+    public static final String DAYFRAGMENT_TAG = "DFTAG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +31,7 @@ public class MonthGraphicActivity extends AppCompatActivity {
 
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_month_graphic, fragment)
+                    .add(R.id.graphic_container, fragment)
                     .commit();
         }
 

@@ -3,6 +3,8 @@ package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -12,17 +14,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.EntryEditActivityFragment;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.R;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.DummyData;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +42,7 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
 
     static final String MONTH_URI = "URI";
     private Uri mUri;
+
     List<PieEntry> entries;
     PieChart pieChart;
 
@@ -53,21 +61,43 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
         if (arguments != null) {
             Log.i("URI Fragment" ,"Arguments Founded!");
             mUri = arguments.getParcelable(MonthGraphicActivityFragment.MONTH_URI);
-            Log.i ("URI MONTH", ""+mUri);
+
         }
 
-         pieChart = (PieChart) rootView.findViewById(R.id.piechart);
 
 
+        Button editarButton = (Button) rootView.findViewById(R.id.buttonViewDays);
+        editarButton.setOnClickListener( new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+
+                Bundle args = new Bundle();
+                args.putParcelable(DaysOfMonthFragment.DAYS_MONTH_URI, mUri);
+
+                DaysOfMonthFragment fragment = new DaysOfMonthFragment ();
+                fragment.setArguments(args);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.graphic_container, fragment, MonthGraphicActivity.DAYFRAGMENT_TAG)
+                        .commit();
+
+
+            }});
+
+
+        pieChart = (PieChart) rootView.findViewById(R.id.piechart);
         return rootView;
     }
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
+
         if ( null != mUri ) {
-            Log.i("URI from Latest" ,""+mUri);
 
             Uri financeEntryWithID = mUri;
             return new CursorLoader(getAppContext(),financeEntryWithID,null,null,null,null);
@@ -80,8 +110,10 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
         }
     }
 
+
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
 
 
         if (cursor.moveToFirst()) {
@@ -89,17 +121,8 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
             while (!cursor.isAfterLast()) {
 
                 double soma = DummyData.round(cursor.getDouble(0),2);
-                Log.i("valor double", ""+soma);
-                Log.i("valor double", ""+(float)soma);
                 entries.add(new PieEntry((float)soma, cursor.getString(1)));
 
-//                Double soma = DummyData.round(cursor.getDouble(0),2);
-//                String data = String.valueOf(soma);
-//                data = data + "\n" + String.valueOf(cursor.getString(1));
-
-
-
-               // Log.i("A GROUP", "" + data);
                 cursor.moveToNext();
             }
         }
@@ -108,6 +131,7 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
         set.setValueTextSize(18f);
 
         PieData data = new PieData(set);
+        data.setValueFormatter(new MyValueFormatter());
         pieChart.animateXY(1400, 1400);
         //data.setValueTextSize(18f);
         Legend l = pieChart.getLegend();
@@ -121,10 +145,29 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
 
         pieChart.invalidate();
 
+
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+
+    public class MyValueFormatter implements IValueFormatter {
+
+
+
+        private DecimalFormat mFormat;
+
+        public MyValueFormatter() {
+            mFormat = new DecimalFormat("###,###,##0.00"); // use one decimal
+        }
+
+
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            return  "R$ " + mFormat.format(value) ; // e.g. append a dollar-sign
+        }
     }
 }
