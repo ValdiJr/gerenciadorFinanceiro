@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.DummyData;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 
 import java.util.ArrayList;
+
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,13 +35,15 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
 
     private Uri mUri;;
 
-
+    private static final int loader_id_edit=5;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View viewRoot = inflater.inflate(R.layout.days_of_month_fragment, container, false);
 
+
+        getLoaderManager().initLoader(loader_id_edit, null, this);
         Bundle arguments = getArguments();
         if (arguments != null) {
             Log.i("URI Fragment" ,"Arguments Founded!");
@@ -58,7 +63,10 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
         if ( null != mUri ) {
             Log.i("URI from Latest", "" + mUri);
 
-            Cursor cursor2 = ManagerDbUtils.selectAllSumCategoriesByDaysofMonth(mUri, null, null);
+            mUri = Uri.parse(mUri+"/days");
+
+            return new CursorLoader(getAppContext(),mUri,null,null,null,null);
+
 
         }
 
@@ -66,7 +74,20 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+        if (cursor.moveToFirst()) {
+
+            while (!cursor.isAfterLast()) {
+                String data="";
+                data = data +" "+ DummyData.round(cursor.getDouble(0),2);
+                data = data + " " +cursor.getString(1);
+                data = data + " " +cursor.getString(2);
+
+                Log.i("data", data);
+                cursor.moveToNext();
+            }
+        }
 
     }
 

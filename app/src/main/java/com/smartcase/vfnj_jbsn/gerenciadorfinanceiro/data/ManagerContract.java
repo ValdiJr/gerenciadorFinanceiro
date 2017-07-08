@@ -21,6 +21,7 @@ public class ManagerContract {
     public static final String PATH_ENTRY_ID = PATH_ENTRY+"/id";
     public static final String PATH_MONTHS_DISTINCTS = PATH_ENTRY+"/months-distinct";
     public static final String PATH_SUM_CAT_MONTH = PATH_ENTRY+"/sum-category-month";
+    public static final String PATH_SUM_CAT_DAYS = PATH_ENTRY+"sum-category-month-days";
 
     public static final class FinanceEntry implements BaseColumns {
 
@@ -64,6 +65,7 @@ public class ManagerContract {
         public static Uri buildSumCategoriesByMonth(String date) {
             return CONTENT_URI.buildUpon().appendPath(PATH_ENTRY).appendPath("sum-category-month").appendPath(date).build();
         }
+
         public static String getMonthFromUri(Uri uri) {
             return uri.getPathSegments().get(2);
         }

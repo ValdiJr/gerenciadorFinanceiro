@@ -35,6 +35,7 @@ public class ManagerContentProvider extends ContentProvider {
     static final int ENTRY_ALL = 103;
     static final int MONTHS_DISTICTS = 104;
     static final int SUM_CAT_MONTH = 105;
+    static final int SUM_CAT_DAY_MONTH = 106;
 
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -48,6 +49,7 @@ public class ManagerContentProvider extends ContentProvider {
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_ENTRY+"/all", ENTRY_ALL);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_MONTHS_DISTINCTS, MONTHS_DISTICTS);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_SUM_CAT_MONTH+"/*", SUM_CAT_MONTH);
+        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_SUM_CAT_MONTH+"/*"+"/days", SUM_CAT_DAY_MONTH);
 
 
         return matcher;
@@ -93,6 +95,11 @@ public class ManagerContentProvider extends ContentProvider {
                     Log.i("SUM_CAT_MONTH", String.valueOf(uri) +" "+sUriMatcher.match(uri));
                     retCursor = ManagerDbUtils.selectAllSumCategoriesByMonths(uri,projection,sortOrder);
                     break;
+            }
+            case SUM_CAT_DAY_MONTH: {
+                Log.i("SUM_CAT_MONTH", String.valueOf(uri) +" "+sUriMatcher.match(uri));
+                retCursor = ManagerDbUtils.selectAllSumCategoriesByDaysofMonth(uri, null, null);
+                break;
             }
             default:
                 Log.i("ENTRY_WITH_DATE", String.valueOf(uri) +" "+sUriMatcher.match(uri));
