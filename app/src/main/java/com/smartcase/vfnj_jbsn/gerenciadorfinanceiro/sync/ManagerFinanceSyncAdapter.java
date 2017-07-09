@@ -36,7 +36,7 @@ public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
     public final String LOG_TAG = ManagerFinanceSyncAdapter.class.getSimpleName();
 
     public static final SharedPreferences sharedPref2 = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
-    public static final String tempoSync = sharedPref2.getString("sync_frequency", "");
+    public static final String tempoSync = sharedPref2.getString("sync_frequency", "60");
 
     public static final int SYNC_INTERVAL = 60*Integer.parseInt(tempoSync);
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/10;
@@ -47,7 +47,7 @@ public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
-        
+
 
 
         HttpURLConnection urlConnection = null;

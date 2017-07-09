@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
     boolean mTwoPane;
 
+    String userName="";
+
 
     @Override
     protected void onResume() {
@@ -46,6 +48,14 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         EntryDetailActivityFragment edf = (EntryDetailActivityFragment) getSupportFragmentManager().findFragmentByTag(ENTRYDETAILFRAGMENT_TAG);
 
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        userName = sharedPref.getString("example_text", "");
+        this.setTitle(userName);
+    }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -55,8 +65,12 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String userName = sharedPref.getString("example_text", "");
+        userName = sharedPref.getString("example_text", "");
+
+
         this.setTitle(userName);
 
 
@@ -163,8 +177,13 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 //            ft.commit();
 //            return true;
         }
+        if (id == R.id.action_graphic) {
+            Intent intent = new Intent(this, MonthActivity.class);
+            startActivity(intent);
 
+        }
         return super.onOptionsItemSelected(item);
+
     }
 
     @Override
