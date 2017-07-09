@@ -123,6 +123,7 @@ public class MonthActivityFragment extends Fragment implements LoaderManager.Loa
 
         monthAdapter.swapCursor(cursor);
 
+
     }
 
     @Override

@@ -72,7 +72,7 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
         mChart.setMaxVisibleValueCount(40);
 
         // scaling can now only be done on x- and y-axis separately
-        mChart.setPinchZoom(true);
+        mChart.setPinchZoom(false);
 
         mChart.setDrawGridBackground(false);
         mChart.setDrawBarShadow(false);
@@ -85,10 +85,16 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
         //leftAxis.setValueFormatter(MonthGraphicActivityFragment.MyValueFormatter);
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         mChart.getAxisRight().setEnabled(false);
+        mChart.setTouchEnabled(true);
+
+
+
 
         XAxis xLabels = mChart.getXAxis();
+
         xLabels.setPosition(XAxis.XAxisPosition.TOP);
-        mChart.animateXY(1400, 1400);
+
+
 
         // mChart.setDrawXLabels(false);
         // mChart.setDrawYLabels(false);
@@ -138,20 +144,22 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
 
         if (cursor.moveToFirst()) {
             dia = cursor.getString(2);
+            //Log.i ("Dia do Mês","Dia: "+Integer.parseInt(cursor.getString(2).substring(8,cursor.getString(2).length())));
             float val1=0;
             float val2=0;
             float val3=0;
 
-            int i = 1;
+            int i = Integer.parseInt(cursor.getString(2).substring(8,cursor.getString(2).length()));
+
             while (!cursor.isAfterLast()) {
-
-                String data="";
-
-                data = data +" "+ DummyData.round(cursor.getDouble(0),2);
-                data = data + " " +cursor.getString(2);
-                data = data + " " +cursor.getString(1);
-
-                Log.i("data", data);
+//
+//                String data="";
+//
+//                data = data +" "+ DummyData.round(cursor.getDouble(0),2);
+//                data = data + " " +cursor.getString(2);
+//                data = data + " " +cursor.getString(1);
+//
+                Log.i("Dia Atual: ", dia);
 
 
 
@@ -172,12 +180,15 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
                             break;
                     }
                 }else {
+
                     yVals1.add(new BarEntry(i, new float[]{val1, val2, val3}));
+
                     val1=0;
                     val2=0;
                     val3=0;
                     dia=cursor.getString(2);
-                    i++;
+                    Log.i ("Dia do Mês","Dia: "+i);
+                    i=Integer.parseInt(cursor.getString(2).substring(8,cursor.getString(2).length()));
                     switch (cursor.getString(1)){
                         case "Casa":
                             val1=(float) DummyData.round(cursor.getDouble(0),2);
@@ -207,21 +218,48 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
 
 
         BarDataSet set1;
-        set1 = new BarDataSet(yVals1, "Custos do Mês");
-        set1.setDrawIcons(false);
-        set1.setColors(getColors());
-        set1.setStackLabels(new String[]{"Casa", "Lazer", "Trabalho"});
+        if (mChart.getData() != null &&
+                mChart.getData().getDataSetCount() > 0) {
+            set1 = (BarDataSet) mChart.getData().getDataSetByIndex(0);
+            set1.setValues(yVals1);
+            mChart.getData().notifyDataChanged();
+            mChart.notifyDataSetChanged();
+        } else {
+            set1 = new BarDataSet(yVals1, "Custos do Mês");
+            set1.setDrawIcons(false);
+            set1.setColors(getColors());
+            set1.setStackLabels(new String[]{"Casa", "Lazer", "Trabalho"});
 
-        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-        dataSets.add(set1);
+            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+            dataSets.add(set1);
 
-        BarData data = new BarData(dataSets);
-        data.setValueFormatter( new MonthGraphicActivityFragment.MyValueFormatter());
-        data.setValueTextColor(Color.WHITE);
+            BarData data = new BarData(dataSets);
 
-        mChart.setData(data);
-        mChart.setFitBars(true);
+            data.setValueFormatter(new MonthGraphicActivityFragment.MyValueFormatter());
+            data.setValueTextColor(Color.WHITE);
+
+            mChart.setData(data);
+        }
+        mChart.setFitBars(false);
         mChart.invalidate();
+
+//        if (cursor.moveToFirst()) {
+//        while (!cursor.isAfterLast()) {
+//
+//                String sdata="";
+//
+//                sdata = sdata +" "+ DummyData.round(cursor.getDouble(0),2);
+//                sdata = sdata + " " +cursor.getString(2);
+//                sdata = sdata + " " +cursor.getString(1);
+//
+//                Log.i("data", sdata);
+//            cursor.moveToNext();
+//        }
+//        }
+
+
+
+
     }
     private int[] getColors() {
 
