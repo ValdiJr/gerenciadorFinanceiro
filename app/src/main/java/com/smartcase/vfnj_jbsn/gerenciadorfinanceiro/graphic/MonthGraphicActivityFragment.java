@@ -1,5 +1,6 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -27,13 +28,15 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.R;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.DummyData;
-import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContentProvider;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.FinanceEntry.buildDayOfyMonth;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -66,7 +69,7 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
 
 
 
-        Button editarButton = (Button) rootView.findViewById(R.id.buttonViewDays);
+        Button editarButton = (Button) rootView.findViewById(R.id.buttonGraphicViewDays);
         editarButton.setOnClickListener( new View.OnClickListener() {
 
             @Override
@@ -82,6 +85,48 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
                         .replace(R.id.graphic_container, fragment, MonthGraphicActivity.DAYFRAGMENT_TAG)
                         .commit();
 
+
+            }});
+
+        final Button daysButton = (Button) rootView.findViewById(R.id.buttonViewDays);
+        daysButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                String month = ManagerContract.FinanceEntry.getMonthFromUri(mUri);
+                Uri daysOfMonth = buildDayOfyMonth(month);
+                Intent intent = new Intent(getAppContext(), DaysMonthActivity.class).setData(daysOfMonth);
+                startActivity(intent);
+
+//                Log.i("Days of Month",daysOfMonth+"");
+
+
+//          Cursor cursor = getAppContext().getContentResolver().query(daysOfMonth,null, null, null, null);
+//          //Log.i("Cursor value: ",""+cursor.toString());
+//
+//          if (cursor.moveToFirst()) {
+//                while (!cursor.isAfterLast()) {
+//                String data = String.valueOf(cursor.getString(0));
+//
+//
+//
+//          Log.i("banco de dados", "" + data);
+//          cursor.moveToNext();
+//          }
+//          }
+
+
+//                Bundle args = new Bundle();
+//                args.putParcelable(DaysOfMonthFragment.DAYS_MONTH_URI, mUri);
+//
+//                DaysOfMonthFragment fragment = new DaysOfMonthFragment ();
+//                fragment.setArguments(args);
+//
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.graphic_container, fragment, MonthGraphicActivity.DAYFRAGMENT_TAG)
+//                        .commit();
+//
 
             }});
 

@@ -15,6 +15,7 @@ import android.util.Log;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
+import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_DAYS_MONTH;
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY;
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY_DATE;
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract.PATH_ENTRY_ID;
@@ -36,6 +37,7 @@ public class ManagerContentProvider extends ContentProvider {
     static final int MONTHS_DISTICTS = 104;
     static final int SUM_CAT_MONTH = 105;
     static final int SUM_CAT_DAY_MONTH = 106;
+    static final int DAYS_OF_MONTH = 107;
 
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -50,6 +52,7 @@ public class ManagerContentProvider extends ContentProvider {
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_MONTHS_DISTINCTS, MONTHS_DISTICTS);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_SUM_CAT_MONTH+"/*", SUM_CAT_MONTH);
         matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_SUM_CAT_MONTH+"/*"+"/days", SUM_CAT_DAY_MONTH);
+        matcher.addURI(ManagerContract.CONTENT_AUTHORITY, PATH_DAYS_MONTH+"/*", DAYS_OF_MONTH);
 
 
         return matcher;
@@ -99,6 +102,11 @@ public class ManagerContentProvider extends ContentProvider {
             case SUM_CAT_DAY_MONTH: {
                 Log.i("SUM_CAT_MONTH", String.valueOf(uri) +" "+sUriMatcher.match(uri));
                 retCursor = ManagerDbUtils.selectAllSumCategoriesByDaysofMonth(uri, null, null);
+                break;
+            }
+            case DAYS_OF_MONTH: {
+                Log.i("DAYS_OF_MONTH", String.valueOf(uri) +" "+sUriMatcher.match(uri));
+                retCursor = ManagerDbUtils.selectAllDaysOfMonthDisctinct(uri);
                 break;
             }
             default:

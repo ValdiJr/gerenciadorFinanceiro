@@ -16,12 +16,26 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" />
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/buttonGraphicViewDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Graphic Days" />
+    />
     <Button
         android:id="@+id/buttonViewDays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Days" />
+    />
+</LinearLayout>
+
+
+
     />
 
 </android.support.constraint.ConstraintLayout>

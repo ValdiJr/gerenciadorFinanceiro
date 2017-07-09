@@ -111,6 +111,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
         </activity>
+        <activity
+            android:name=".graphic.DaysMonthActivity"
+            android:label="@string/title_activity_days_month"
+            android:parentActivityName=".graphic.MonthActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic.MonthActivity" />
+        </activity>
     </application>
 
 </manifest>

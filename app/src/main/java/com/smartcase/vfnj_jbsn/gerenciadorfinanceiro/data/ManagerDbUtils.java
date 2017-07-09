@@ -239,6 +239,37 @@ public class ManagerDbUtils {
 
 
 
+    public static Cursor selectAllDaysOfMonthDisctinct (Uri uri){
+
+        ManagerDbHelper managerDbHelper = new ManagerDbHelper(MyApplication.getAppContext());
+        SQLiteDatabase sqLiteDatabase = managerDbHelper.getReadableDatabase();
+
+// Define a projection that specifies which columns from the database
+// you will actually use after this query.
+
+        String month = ManagerContract.FinanceEntry.getMonthFromUri(uri);
+
+
+        Cursor c = sqLiteDatabase.rawQuery("SELECT "
+                //+ManagerContract.FinanceEntry._ID+" , "
+              //  +ManagerContract.FinanceEntry.COLUMN_ENTRY_VALUE+ ", "
+                +"Distinct "+ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA+ ", "
+                +ManagerContract.FinanceEntry._ID
+               // +ManagerContract.FinanceEntry.COLUMN_ENTRY_DESCRIPTION + ", "
+             //   +ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY + ", "
+            //    +ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH
+                +" FROM "+ManagerContract.FinanceEntry.TABLE_NAME
+                +" WHERE "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH + " like '"+month+"' "
+
+                , null);
+
+
+        return c;
+
+
+    }
+
+
 
 
 
