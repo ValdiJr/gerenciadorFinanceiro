@@ -228,8 +228,8 @@ public class ManagerDbUtils {
                 +ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA + " AS dias"
                 +" FROM "+ManagerContract.FinanceEntry.TABLE_NAME
                 +" WHERE "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH + " like '"+month+"' "
-                +" GROUP BY "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY +","+
-                ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA, null);
+                +" GROUP BY "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA +","+
+                ManagerContract.FinanceEntry.COLUMN_ENTRY_CATEGORY, null);
 
 
         return c;

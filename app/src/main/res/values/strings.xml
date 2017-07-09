@@ -5,10 +5,8 @@
     <string name="valueTitle">Valor</string>
     <string-array name="planets_array">
         <item>Casa</item>
-        <item>Almoço</item>
-        <item>Lanche</item>
-        <item>Roupa</item>
-        <item>Acessórios</item>
+        <item>Lazer</item>
+        <item>Trabalho</item>
     </string-array>
     <string name="title_activity_entry_edit">EntryEditActivity</string>
     <!-- SyncAdapter related -->

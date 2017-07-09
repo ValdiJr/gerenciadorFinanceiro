@@ -154,7 +154,7 @@ public class MonthGraphicActivityFragment extends Fragment  implements LoaderMan
     }
 
 
-    public class MyValueFormatter implements IValueFormatter {
+    public static class MyValueFormatter implements IValueFormatter {
 
 
 
