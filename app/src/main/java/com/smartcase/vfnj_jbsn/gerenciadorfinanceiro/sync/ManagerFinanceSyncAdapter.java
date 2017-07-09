@@ -9,15 +9,18 @@ import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.SyncRequest;
 import android.content.SyncResult;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.R;
 
 import java.io.BufferedReader;
@@ -31,8 +34,11 @@ import java.net.URL;
 
 public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
     public final String LOG_TAG = ManagerFinanceSyncAdapter.class.getSimpleName();
-    //Minimo de uma 1 hora
-    public static final int SYNC_INTERVAL = 60*120;
+
+    public static final SharedPreferences sharedPref2 = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
+    public static final String tempoSync = sharedPref2.getString("sync_frequency", "");
+
+    public static final int SYNC_INTERVAL = 60*Integer.parseInt(tempoSync);
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/10;
 
     public ManagerFinanceSyncAdapter(Context context, boolean autoInitialize) {
@@ -41,7 +47,7 @@ public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
-        Log.i("oNNNN", "onPerformSync Called.");
+        
 
 
         HttpURLConnection urlConnection = null;
@@ -79,10 +85,12 @@ public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
             }
             testeJsonStr = buffer.toString();
 
-            Log.i("onnnnn",testeJsonStr);
 
-            notifyWeather();
-
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
+            String notify = sharedPref.getString("notifications_new_message", "");
+            if (notify.equals("true")){
+                notifyWeather();
+            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

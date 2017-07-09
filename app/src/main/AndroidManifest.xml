@@ -103,6 +103,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic.MonthActivity" />
         </activity>
+        <activity
+            android:name=".preferences.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

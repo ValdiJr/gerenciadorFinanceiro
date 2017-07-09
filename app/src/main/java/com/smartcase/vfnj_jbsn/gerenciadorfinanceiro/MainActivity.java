@@ -2,10 +2,12 @@ package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +23,7 @@ import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic.MonthActivity;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.models.FinanceEntry;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.preferences.SettingsActivity;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.sync.ManagerFinanceSyncAdapter;
 
 import java.util.Date;
@@ -52,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String userName = sharedPref.getString("example_text", "");
+        this.setTitle(userName);
+
+
 
 
         //DummyData.generateDummyEntries();
@@ -128,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Intent intent = new Intent(this, MonthActivity.class);
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
  //           ManagerFinanceSyncAdapter.syncImmediately(this);
 //            Intent alarmIntent = new Intent(this, FinanceService.AlarmReceiver.class);
