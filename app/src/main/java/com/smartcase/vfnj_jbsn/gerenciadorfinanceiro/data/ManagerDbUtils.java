@@ -261,6 +261,7 @@ public class ManagerDbUtils {
                 +" FROM "+ManagerContract.FinanceEntry.TABLE_NAME
                 +" WHERE "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_MONTH + " like '"+month+"' "
                 +" GROUP BY "+ ManagerContract.FinanceEntry.COLUMN_ENTRY_DATA
+                +" ORDER BY "+ ManagerContract.FinanceEntry._ID
 
                 , null);
 

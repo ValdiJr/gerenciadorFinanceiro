@@ -1,6 +1,7 @@
 package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.EntryDetailActivity;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.R;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.utils.FinanceEntryAdapter;
@@ -55,12 +58,32 @@ public class DaysEntriesPastFragment extends Fragment implements LoaderManager.L
             Log.i("URI Fragment" ,"Arguments Founded! "+mUri);
 
         }
-
         financeEntryAdapter = new FinanceEntryAdapter(getAppContext(),null,0);
 
        listViewEntries = (ListView) viewRoot.findViewById(R.id.listview_forecast);
        listViewEntries.setAdapter(financeEntryAdapter);
 
+        listViewEntries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView adapterView, View view, int position, long l) {
+                // CursorAdapter returns a cursor at the correct position for getItem(), or null
+                // if it cannot seek to that position.
+                Cursor c = (Cursor) adapterView.getItemAtPosition(position);
+
+
+                if (c != null) {
+                    Log.i("banco de dados", "" + position);
+                    Uri financeEntryWithID = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
+                    Intent intent = new Intent(getAppContext(), EntryDetailActivity.class).setData(financeEntryWithID);
+                    startActivity(intent);
+
+
+
+                }
+
+            }
+        });
 
 
         return viewRoot;
