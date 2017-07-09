@@ -27,12 +27,12 @@ public class DummyData {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void  generateDummyEntries() {
-        for (j = 6; j <= 6; j++)
+        for (j = 4; j <= 6; j++)
 
         {
-            for (i = 0; i <= 10; i++) {
-                int randomNum = 9;
-                double randomDouble = ThreadLocalRandom.current().nextDouble(0.1, 2.0);
+            for (i = 0; i <= 500; i++) {
+                int randomNum = ThreadLocalRandom.current().nextInt(1, 31 + 1);
+                double randomDouble = ThreadLocalRandom.current().nextDouble(0.1, 10.0);
                 randomDouble = round(randomDouble, 2);
                 entry.setValueEntry(randomDouble);
                 int randomCategory = ThreadLocalRandom.current().nextInt(1, 3 + 1);

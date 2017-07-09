@@ -4,6 +4,9 @@ package com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.hardware.camera2.params.ColorSpaceTransform;
+
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import android.net.Uri;
 import android.os.Build;
@@ -31,7 +34,10 @@ import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.R;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.DummyData;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerDbUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
@@ -64,41 +70,40 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
             Log.i("URI Fragment" ,""+arguments);
 
         }
-
         mChart = (BarChart) viewRoot.findViewById(R.id.chart1);
+       // mChart.setOnChartValueSelectedListener(this);
 
         mChart.getDescription().setEnabled(false);
 
+        // if more than 60 entries are displayed in the chart, no values will be
+        // drawn
         mChart.setMaxVisibleValueCount(40);
 
         // scaling can now only be done on x- and y-axis separately
-        mChart.setPinchZoom(false);
+        mChart.setPinchZoom(true);
 
         mChart.setDrawGridBackground(false);
         mChart.setDrawBarShadow(false);
 
         mChart.setDrawValueAboveBar(false);
         mChart.setHighlightFullBarEnabled(false);
+        mChart.setDoubleTapToZoomEnabled(false);
 
         // change the position of the y-labels
         YAxis leftAxis = mChart.getAxisLeft();
-        //leftAxis.setValueFormatter(MonthGraphicActivityFragment.MyValueFormatter);
+        leftAxis.setValueFormatter(new MyAxisValueFormatter());
         leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
         mChart.getAxisRight().setEnabled(false);
-        mChart.setTouchEnabled(true);
-
-
-
 
         XAxis xLabels = mChart.getXAxis();
-
         xLabels.setPosition(XAxis.XAxisPosition.TOP);
-
-
 
         // mChart.setDrawXLabels(false);
         // mChart.setDrawYLabels(false);
 
+        // setting data
+//        mSeekBarX.setProgress(12);
+//        mSeekBarY.setProgress(100);
 
         Legend l = mChart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
@@ -109,8 +114,7 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
         l.setFormToTextSpace(4f);
         l.setXEntrySpace(6f);
 
-
-
+        // mChart.setDrawLegend(false);
 
 
 
@@ -139,9 +143,12 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-        String dia;
 
+
+        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+        Map<Integer, BarEntry> mapStringBar = new HashMap<Integer, BarEntry>();
+        String dia;
+//
         if (cursor.moveToFirst()) {
             dia = cursor.getString(2);
             //Log.i ("Dia do Mês","Dia: "+Integer.parseInt(cursor.getString(2).substring(8,cursor.getString(2).length())));
@@ -150,20 +157,10 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
             float val3=0;
 
             int i = Integer.parseInt(cursor.getString(2).substring(8,cursor.getString(2).length()));
-
+//
             while (!cursor.isAfterLast()) {
+////
 //
-//                String data="";
-//
-//                data = data +" "+ DummyData.round(cursor.getDouble(0),2);
-//                data = data + " " +cursor.getString(2);
-//                data = data + " " +cursor.getString(1);
-//
-                Log.i("Dia Atual: ", dia);
-
-
-
-
                 if (dia.equals(cursor.getString(2))){
                     switch (cursor.getString(1)){
                         case "Casa":
@@ -178,10 +175,10 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
                         default:
                             Log.i("switch case", "nenhuma das opçẽs");
                             break;
-                    }
+                   }
                 }else {
-
-                    yVals1.add(new BarEntry(i, new float[]{val1, val2, val3}));
+//
+                    mapStringBar.put(i,(new BarEntry(i, new float[]{val1, val2, val3})));
 
                     val1=0;
                     val2=0;
@@ -207,14 +204,39 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
                 }
 
                 cursor.moveToNext();
-
+//
             }
 //
-
-
-
-
+            mapStringBar.put(i,(new BarEntry(i, new float[]{val1, val2, val3})));
+//            Log.i ("Dia do Mês","Dia: "+i);
+//
+//
+////
+//
+//
+//
+//
         }
+
+        for (Map.Entry<Integer,BarEntry> pair : mapStringBar.entrySet()) {
+            System.out.println(pair.getKey());
+            System.out.println(pair.getValue());
+
+            yVals1.add(pair.getValue());
+        }
+
+
+
+
+
+
+//        for (int i = 0; i < 31; i++) {
+//            float mult = 31;
+//            float val1 = (float) (Math.random() * mult) + mult / 3;
+//            float val2 = (float) (Math.random() * mult) + mult / 3;
+//            float val3 = (float) (Math.random() * mult) + mult / 3;
+
+
 
 
         BarDataSet set1;
@@ -240,22 +262,8 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
 
             mChart.setData(data);
         }
-        mChart.setFitBars(false);
+        mChart.setFitBars(true);
         mChart.invalidate();
-
-//        if (cursor.moveToFirst()) {
-//        while (!cursor.isAfterLast()) {
-//
-//                String sdata="";
-//
-//                sdata = sdata +" "+ DummyData.round(cursor.getDouble(0),2);
-//                sdata = sdata + " " +cursor.getString(2);
-//                sdata = sdata + " " +cursor.getString(1);
-//
-//                Log.i("data", sdata);
-//            cursor.moveToNext();
-//        }
-//        }
 
 
 
@@ -277,5 +285,19 @@ public class DaysOfMonthFragment extends Fragment  implements LoaderManager.Load
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+}
+class MyAxisValueFormatter implements IAxisValueFormatter
+{
+
+    private DecimalFormat mFormat;
+
+    public MyAxisValueFormatter() {
+        mFormat = new DecimalFormat("###,###,###,##0.0");
+    }
+
+    @Override
+    public String getFormattedValue(float value, AxisBase axis) {
+        return mFormat.format(value);
     }
 }
