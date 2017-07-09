@@ -22,7 +22,7 @@ import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getApp
 /**
  * A placeholder fragment containing a simple view.
  */
-public class EntryDetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class DaysPastDetailActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     static final String ENTRYDETAIL_URI = "URI";
     private Uri mUri;
@@ -32,7 +32,7 @@ public class EntryDetailActivityFragment extends Fragment implements LoaderManag
     TextView tvValue;
     TextView tvCategory;
     TextView tvDate;
-    public EntryDetailActivityFragment() {
+    public DaysPastDetailActivityFragment() {
 
     }
 

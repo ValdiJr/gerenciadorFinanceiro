@@ -88,6 +88,7 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_days_of_month">DaysOfMonthActivity</string>
     <string name="title_activity_days_month">DaysMonthActivity</string>
+    <string name="title_activity_days_past_detail">DaysPastDetailActivity</string>
 
 
 </resources>

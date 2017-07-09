@@ -62,7 +62,7 @@ public class FinanceEntryAdapter extends CursorAdapter {
         viewHolder.iconView.setImageResource(R.drawable.default_icon);
 
         TextView valueEntryView = (TextView) view.findViewById(R.id.list_item_high_textview);
-        viewHolder.valueEntryView.setText(cursor.getDouble(1)+"");
+        viewHolder.valueEntryView.setText("R$ "+cursor.getDouble(1)+"");
 
         TextView dataEntryView = (TextView) view.findViewById(R.id.list_item_detail);
         viewHolder.dataEntryView.setText(cursor.getString(2));

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.DaysPastDetailActivity;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.EntryDetailActivity;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.R;
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
@@ -75,7 +76,7 @@ public class DaysEntriesPastFragment extends Fragment implements LoaderManager.L
                 if (c != null) {
                     Log.i("banco de dados", "" + position);
                     Uri financeEntryWithID = ManagerContract.FinanceEntry.buildEntryWithID(c.getInt(0));
-                    Intent intent = new Intent(getAppContext(), EntryDetailActivity.class).setData(financeEntryWithID);
+                    Intent intent = new Intent(getAppContext(), DaysPastDetailActivity.class).setData(financeEntryWithID);
                     startActivity(intent);
 
 
