@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.data.ManagerContract;
+import com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.graphic.MonthActivity;
 
 import static com.smartcase.vfnj_jbsn.gerenciadorfinanceiro.MyApplication.getAppContext;
 
@@ -70,7 +71,7 @@ public class DaysPastDetailActivityFragment extends Fragment implements LoaderMa
                 String selection = ManagerContract.FinanceEntry._ID+ " = ? ";
 
                 getAppContext().getContentResolver().delete(financeEntryWriteUri,selection, new String[]{String.valueOf(entryID)});
-                Intent intent = new Intent(MyApplication.getAppContext(), MainActivity.class);
+                Intent intent = new Intent(MyApplication.getAppContext(), MonthActivity.class);
                 startActivity(intent);
             }});
 

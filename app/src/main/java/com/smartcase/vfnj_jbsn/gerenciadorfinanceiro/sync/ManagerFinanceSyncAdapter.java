@@ -104,7 +104,7 @@ public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(getContext())
                         .setSmallIcon(R.drawable.icon24)
-                        .setContentTitle("Olá! "+sharedPref2.getString("example_text", "User Name"))
+                        .setContentTitle("Olá! "+sharedPref2.getString("example_text", ""))
                         .setContentText(textNews);
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(getContext(),MainActivity.class);

@@ -105,13 +105,13 @@ public class DaysEditPastFragment extends Fragment implements LoaderManager.Load
                 getAppContext().getContentResolver().update(financeEntryWriteUri, values,selection,new String[]{String.valueOf(entryID)});
 
                 Bundle args = new Bundle();
-                args.putParcelable(EntryDetailActivityFragment.ENTRYDETAIL_URI, mUri);
+                args.putParcelable(DaysPastDetailActivityFragment.ENTRYDETAIL_URI, mUri);
 
-                EntryDetailActivityFragment fragment = new EntryDetailActivityFragment();
+                DaysPastDetailActivityFragment fragment = new DaysPastDetailActivityFragment();
                 fragment.setArguments(args);
 
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.entry_detail_container, fragment, "EDFTAG")
+                        .replace(R.id.entry_detail_container, fragment)
                         .commit();
             }
         });
