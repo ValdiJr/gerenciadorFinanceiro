@@ -68,10 +68,11 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        userName = sharedPref.getString("example_text", "");
+        userName = sharedPref.getString("example_text", "User Name");
 
 
         this.setTitle(userName);
+
 
 
 

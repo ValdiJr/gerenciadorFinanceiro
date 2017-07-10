@@ -34,9 +34,12 @@ import java.net.URL;
 
 public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
     public final String LOG_TAG = ManagerFinanceSyncAdapter.class.getSimpleName();
+    String textNews;
 
     public static final SharedPreferences sharedPref2 = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
     public static final String tempoSync = sharedPref2.getString("sync_frequency", "60");
+
+
 
     public static final int SYNC_INTERVAL = 60*Integer.parseInt(tempoSync);
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/10;
@@ -54,9 +57,7 @@ public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
         BufferedReader reader = null;
         String testeJsonStr = null;
 
-        String urlString= "https://query.yahooapis.com/v1/public/yql?q=select%20*%20" +
-                "from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22)&" +
-                "format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+        String urlString= "https://apiandroid.herokuapp.com/api/texto";
         try {
 
             URL url = new URL(urlString);
@@ -83,11 +84,11 @@ public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
                 // Stream was empty.  No point in parsing.
                 return;
             }
-            testeJsonStr = buffer.toString();
+            textNews = buffer.toString();
 
 
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MyApplication.getAppContext());
-            String notify = sharedPref.getString("notifications_new_message", "");
+            String notify = sharedPref.getString("notifications_new_message", "true");
             if (notify.equals("true")){
                 notifyWeather();
             }
@@ -103,8 +104,8 @@ public class ManagerFinanceSyncAdapter extends AbstractThreadedSyncAdapter {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(getContext())
                         .setSmallIcon(R.drawable.icon24)
-                        .setContentTitle("My notification")
-                        .setContentText("Lets Manager!");
+                        .setContentTitle("Olá! "+sharedPref2.getString("example_text", "User Name"))
+                        .setContentText(textNews);
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(getContext(),MainActivity.class);
 
