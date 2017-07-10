@@ -30,7 +30,7 @@ public class DummyData {
         for (j = 4; j <= 6; j++)
 
         {
-            for (i = 0; i <= 500; i++) {
+            for (i = 0; i <= 50; i++) {
                 int randomNum = ThreadLocalRandom.current().nextInt(1, 31 + 1);
                 double randomDouble = ThreadLocalRandom.current().nextDouble(0.1, 10.0);
                 randomDouble = round(randomDouble, 2);

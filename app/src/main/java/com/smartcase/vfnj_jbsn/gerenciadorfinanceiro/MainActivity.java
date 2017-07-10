@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
 
 
 
-        //DummyData.generateDummyEntries();
+
         ManagerFinanceSyncAdapter.initializeSyncAdapter(this);
 
 //
@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -180,6 +181,10 @@ public class MainActivity extends AppCompatActivity implements LatestsEntryFragm
         if (id == R.id.action_graphic) {
             Intent intent = new Intent(this, MonthActivity.class);
             startActivity(intent);
+
+        }
+        if (id == R.id.action_dummy) {
+            DummyData.generateDummyEntries();
 
         }
         return super.onOptionsItemSelected(item);

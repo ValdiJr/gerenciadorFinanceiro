@@ -22,9 +22,9 @@ public class DaysPastDetailActivity extends AppCompatActivity {
             // using a fragment transaction.
 
             Bundle arguments = new Bundle();
-            arguments.putParcelable(EntryDetailActivityFragment.ENTRYDETAIL_URI, getIntent().getData());
+            arguments.putParcelable(DaysPastDetailActivityFragment.ENTRYDETAIL_URI, getIntent().getData());
 
-            DaysEditPastFragment fragment = new DaysEditPastFragment();
+            DaysPastDetailActivityFragment fragment = new DaysPastDetailActivityFragment ();
             fragment.setArguments(arguments);
 
 
